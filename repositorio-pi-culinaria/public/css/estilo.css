@@ -3,8 +3,8 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: black;
+  font-family: 'Small Caps', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: rgb(255, 251, 245);
 }
 
 :root {
@@ -17,13 +17,13 @@ body {
 
 .container {
   display: flex;
-  width: 80%;
+  width: 85%;
   margin: auto;
 }
 
 .header {
   height: var(--tamanho-header);
-  border-bottom: 2px solid #32b9cd;
+  border-bottom: 2px solid #d1c9c0;
 }
 
 .header .container {
@@ -34,7 +34,7 @@ body {
 
 .header a {
   text-decoration: none;
-  color: #e3b062;
+  color: #cf2222;
 }
 
 .agora {
@@ -47,11 +47,17 @@ body {
   align-items: center;
   justify-content: space-between;
   list-style: none;
-  color: #e3b062;
+  color: #cf2222;
+  border-bottom: 3px solid transparent;
+  border-top: 2px solid transparent;
+}
+
+.navbar li a:hover {
+  border-bottom: 3px solid #cf2222;
 }
 
 .titulo {
-  color: #32b9cd;
+  color: #cf2222;
   width: fit-content;
   font-weight: 500;
 }
@@ -121,8 +127,8 @@ body {
 /* FOOTER */
 
 .footer {
-  background-color: #32b9cd;
-  height: 150px;
+  background-color: #cf2222;
+  height: 100px;
   color: #fff;
   display: flex;
   font-size: 15px;
@@ -305,7 +311,7 @@ input {
 /* SIMULADOR */
 
 .simulador {
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .simulador .container {
