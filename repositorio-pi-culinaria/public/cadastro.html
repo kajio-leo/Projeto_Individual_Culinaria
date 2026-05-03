@@ -20,7 +20,8 @@
   <div class="header">
     <div class="container">
       <h1 class="titulo">
-        <a href="index.html">Companheiros Cozinheiros</h1></a>
+        <a href="index.html">Companheiros Cozinheiros</a>
+      </h1>
       <ul class="navbar">
         <li>
           <a>Receitas</a>
@@ -54,20 +55,12 @@
                          Assim que inserir vá para o script abaixo.
                      -->
           <div class="campo">
-            <span>Código de ativação:</span>
-            <input id="codigo_input" type="text" placeholder="Insira aqui seu código" />
-          </div>
-          <div class="campo">
             <span>Nome:</span>
             <input id="nome_input" type="text" placeholder="Seu nome" />
           </div>
           <div class="campo">
             <span>E-mail:</span>
             <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
-          </div>
-          <div class="campo">
-            <span>CPF:</span>
-            <input id="cpf_input" type="number" placeholder="00011122233 (apenas números)" />
           </div>
           <div class="campo">
             <span>Senha:</span>
@@ -114,18 +107,14 @@
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
-    var codigoVar = codigo_input.value;
-    var idEmpresaVincular;
-    var cpfVar = cpf_input.value;
+
 
     // Verificando se há algum campo em branco
     if (
       nomeVar == "" ||
       emailVar == "" ||
       senhaVar == "" ||
-      confirmacaoSenhaVar == "" ||
-      codigoVar == "" ||
-      cpfVar == ""
+      confirmacaoSenhaVar == ""
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
@@ -137,18 +126,6 @@
       setInterval(sumirMensagem, 5000);
     }
 
-    // Verificando se o código de ativação é de alguma empresa cadastrada
-    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-        idEmpresaVincular = listaEmpresasCadastradas[i].id
-        console.log("Código de ativação válido.");
-        break;
-      } else {
-        cardErro.style.display = "block";
-        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
-        finalizarAguardar();
-      }
-    }
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
@@ -161,9 +138,7 @@
         // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
         emailServer: emailVar,
-        senhaServer: senhaVar,
-        idEmpresaVincularServer: idEmpresaVincular,
-        cpfServer: cpfVar
+        senhaServer: senhaVar
       }),
     })
       .then(function (resposta) {
