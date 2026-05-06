@@ -103,10 +103,21 @@ body {
   width: 40%;
   align-items: center;
   justify-content: flex-start;
+  padding-top: 10%;
   padding-left: 5%;
   padding-right: 5%;
   padding-bottom: 5%;
   height: 450px;
+}
+
+.banner .container .box1 p {
+  font-size: 16px;
+  text-align: center;
+  padding-bottom: 10%;
+  padding-top: 2%;
+  padding-left: 2%;
+  padding-right: 2%;
+  margin: 0;
 }
 
 .botaoRec {
@@ -180,7 +191,7 @@ body {
 }
 
 .box img {
-  width: 170px;
+  width: 100%;
 }
 
 .social .container .boxes {
