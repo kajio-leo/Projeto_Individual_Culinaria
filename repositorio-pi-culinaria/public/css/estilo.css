@@ -97,6 +97,16 @@ body {
   width: 80%; 
 }
 
+.banner .container .box2 a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  justify-content: center;
+  width: 100%;  
+}
+
 .banner .container .box1 {
   display: flex;
   flex-direction: column;
@@ -147,11 +157,12 @@ body {
 }
 
 
-.banner .container .box2 a {
+.banner .container .box2 p {
   display: flex;
   align-self: flex-start;
   padding-left: 10%;
   padding-top: 1%;
+  margin: 0;
 }
 
 .banner .container .box2 span {
@@ -185,6 +196,33 @@ body {
   text-align: center;
 }
 
+.tituloRec {
+  display: flex;
+  font-family: 'Poppins', 'sans-serif';
+  align-items: center;
+  width: 80%;
+  font-weight: 600;
+  font-size: 38px;
+  color: #c62020;
+  align-self: center;
+  text-align: center;
+}
+
+.tituloRec::before,
+.tituloRec::after {
+  content: "";
+  flex: 1;
+  background-color: #c62020;
+  height: 2px;
+}
+
+.tituloRec::before {
+  margin-right: 20px;
+}
+
+.tituloRec::after {
+  margin-left: 20px;
+}
 
 .botaoRec:hover {
   transform: scale(1.1);
@@ -192,6 +230,11 @@ body {
 
 .box img {
   width: 100%;
+}
+
+.box a{
+  text-decoration: none;
+  color: inherit;
 }
 
 .social .container .boxes {
