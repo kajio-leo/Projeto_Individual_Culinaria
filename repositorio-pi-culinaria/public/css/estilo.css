@@ -9,7 +9,7 @@ body {
 :root {
   --tamanho-header: 80px;
   --tamanho-banner: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) + 5px);
-  --tamanho-simulador: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
+  --tamanho-sobre: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
   --tamanho-login: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
   --tamanho-footer: 65px;
 }
@@ -174,7 +174,6 @@ body {
 }
 
 
-
 /* MISSÃO VISÃO VALORES */
 
 .social {
@@ -284,7 +283,6 @@ body {
 
 .login {
   height: var(--tamanho-login);
-  background-image: url('../assets/imgs/bg-jelly-fish-para-home.png');
   background-size: cover;
 }
 
@@ -296,12 +294,12 @@ body {
 
 .card {
   width: 50%;
-  background-color: #e5e5e5;
+  background-color: #dddacf;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  color: palevioletred;
+  color: #c62020;
   flex-direction: column;
   height: fit-content;
   padding: 20px 0;
@@ -326,16 +324,16 @@ body {
 }
 
 .formulario input {
-  border: 2px solid #32b9cd;
+  border: 2px solid #c62020;
   text-align: center;
   border-radius: 10px;
   margin: 0;
 }
 
 .formulario select {
-  border: 2px solid #32b9cd;
+  border: 2px solid #c62020;
   background-color: white;
-  color: gray;
+  color: #b11d1d;
   height: 36px;
   text-align: center;
   border-radius: 10px;
@@ -362,6 +360,11 @@ body {
   height: 30px;
   align-self: center;
   margin-top: 20px;
+  transition: 0.3;
+}
+
+.botao:hover {
+  transform: scale(1.05);
 }
 
 .loading-div {
@@ -392,7 +395,7 @@ body {
   width: 230px;
   position: fixed;
   border-radius: 4px;
-  border: #ED145B 3px solid;
+  border: #c62020 3px solid;
   padding: 10px;
   margin-right: 10%;
 }
@@ -445,17 +448,30 @@ input {
   width: 50px;
 }
 
-/* SIMULADOR */
+/* Sobre */
 
-.simulador {
+.sobre {
   color: rgb(0, 0, 0);
 }
 
-.simulador .container {
+.sobre .container {
   flex-direction: column;
-  overflow: scroll; 
-  height: var(--tamanho-simulador);
+  height: 100%;
+  width: 70%;
 }
+
+.sobre .container p {
+  font-size: 18px;
+  margin: 10px;
+}
+
+.sobre .container .imgs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+
 
 /* ALERTA */
 
