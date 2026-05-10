@@ -42,7 +42,7 @@ body {
 }
 
 .navbar {
-  width: 300px;
+  width: 200px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -340,6 +340,17 @@ body {
   margin: 0;
 }
 
+.formulario .cadastrin {
+  font-size: 15px;
+  align-self: center;
+}
+
+.formulario .cadastrin a {
+  text-decoration: none;
+  font-weight: 700;
+  color: #c62020;
+}
+
 .campo {
   display: flex;
   flex-direction: column;
@@ -359,7 +370,7 @@ body {
   width: 120px;
   height: 30px;
   align-self: center;
-  margin-top: 20px;
+  margin-top: 15px;
   transition: 0.3;
 }
 
@@ -447,6 +458,7 @@ input {
   height: 50px;
   width: 50px;
 }
+
 
 /* Sobre */
 
