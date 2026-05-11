@@ -42,21 +42,25 @@
             </div>
 
             <div id="opcoes" class="flex-colunar padding-8">
-                <span>
+                <span id="contOpcaoUm">
                     <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
                     <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
                 </span>
-                <span>
+                <span id="contOpcaoDois">
                     <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
                     <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
                 </span>
-                <span>
+                <span id="contOpcaoTres">
                     <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
                     <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
                 </span>
-                <span>
+                <span id="contOpcaoQuatro">
                     <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
                     <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
+                </span>
+                <span id="contOpcaoCinco">
+                    <input type="radio" id="quintaOpcao" name="option" class="radio" value="alternativaE" />
+                    <label for="quintaOpcao" class="option" id="labelOpcaoCinco"></label>
                 </span>
             </div>
 
@@ -76,40 +80,92 @@
     const listaDeQuestoes = [
 
         {
-            pergunta: "Qual mês tem 30 dias?",
-            alternativaA: "Janeiro",
-            alternativaB: "Dezembro",
-            alternativaC: "Junho",
-            alternativaD: "Agosto",
-            alternativaCorreta: "alternativaC"
+            pergunta: "O que você prefere?",
+            alternativaA: "Doce",
+            alternativaB: "Salgado"
         },
 
         {
-            pergunta: "Quantas horas tem em um dia?",
-            alternativaA: "30 horas",
-            alternativaB: "38 horas",
-            alternativaC: "48 horas",
-            alternativaD: "24 horas",
-            alternativaCorreta: "alternativaD"
+            pergunta: "Qual seu bolo favorito?",
+            alternativaA: "Cenoura",
+            alternativaB: "Morango",
+            alternativaC: "Limão",
+            alternativaD: "Chocolate",
+            alternativaE: "Fubá"
         },
 
         {
-            pergunta: "Qual destes números é ímpar?",
-            alternativaA: "Dez",
-            alternativaB: "Doze",
-            alternativaC: "Oito",
-            alternativaD: "Onze",
-            alternativaCorreta: "alternativaD"
-        }
+            pergunta: "Qual seu docinho de festa preferido?",
+            alternativaA: "Brigadeiro",
+            alternativaB: "Beijinho",
+            alternativaC: "Bicho de Pé(de morango)",
+            alternativaD: "Cajuzinho",
+            alternativaE: "Bala de coco"
+        },
 
+        {
+            pergunta: "Qual salgado é mais gostoso?",
+            alternativaA: "Coxinha",
+            alternativaB: "Quibe",
+            alternativaC: "Esfiha",
+            alternativaD: "Risole",
+            alternativaE: "Bauru(joelho)" 
+        },
+
+        {
+            pergunta: "O que é melhor?",
+            alternativaA: "Feijoada",
+            alternativaB: "Parmeggiana",
+            alternativaC: "Strogonoff",
+            alternativaD: "Virado à Paulista",
+            alternativaE: "Lasanha" 
+        },
+
+        {
+            pergunta: "Qual ambiente você mais gosta?",
+            alternativaA: "Padaria",
+            alternativaB: "Cafeteria",
+            alternativaC: "Restaurante",
+            alternativaD: "Boteco",
+            alternativaE: "Feira" 
+        },
+
+        {
+            pergunta: "Como prefere celebrar momentos especiais?",
+            alternativaA: "Restaurante",
+            alternativaB: "Karaokê",
+            alternativaC: "Pubs(bares) com música ao vivo",
+            alternativaD: "Confraternização em casa",
+            alternativaE: "Sozinho" 
+        },
+
+        {
+            pergunta: "Com que frequência você se reune para comer com sua família (avós, avôs, tios e tias)?",
+            alternativaA: "4 ou mais vezes por mês",
+            alternativaB: "2-3 vezes por mês",
+            alternativaC: "1 vez por mês",
+            alternativaD: "1 vez a cada três meses",
+            alternativaE: "1 vez por ano" 
+        },
+
+        {
+            pergunta: "Com que frequência você divide a mesa com sua família que mora com você?",
+            alternativaA: "Todo dia",
+            alternativaB: "Dia sim, dia não",
+            alternativaC: "3 vezes por semana",
+            alternativaD: "De vez em quando",
+            alternativaE: "Nunca"
+        },
+
+        {
+            pergunta: "Gostaria de ver receitas incríveis para fazer e comer em família?",
+            alternativaA: "Simmm!",
+            alternativaB: "Não!"
+        },
     ]
 
     // variáveis globais    
     let numeroDaQuestaoAtual = 0
-    let pontuacaoFinal = 0
-    let tentativaIncorreta = 0
-    let certas = 0
-    let erradas = 0
     let quantidadeDeQuestoes = listaDeQuestoes.length
     // let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
 
@@ -140,11 +196,22 @@
         console.log("questaoAtual")
         console.log(questaoAtual)
         document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
+        if (numeroDaQuestaoAtual == 0 || numeroDaQuestaoAtual == 9) {
+            contOpcaoTres.style.display = "none"
+            contOpcaoQuatro.style.display = "none"
+            contOpcaoCinco.style.display = "none"
+        } else {
+            contOpcaoTres.style.display = "block"
+            contOpcaoQuatro.style.display = "block"
+            contOpcaoCinco.style.display = "block"
+        }
+
         document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
         document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
         document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
         document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
         document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
+        document.getElementById("labelOpcaoCinco").innerHTML = questaoAtual.alternativaE;
     }
 
     function submeter() {
@@ -165,8 +232,7 @@
             btnProx.disabled = false
 
             habilitarAlternativas(false)
-
-            checarResposta()
+            numeroDaQuestaoAtual++
         }
     }
 
@@ -177,7 +243,7 @@
         segundaOpcao.disabled = opcaoEscolhida
         terceiraOpcao.disabled = opcaoEscolhida
         quartaOpcao.disabled = opcaoEscolhida
-
+        quintaOpcao.disabled = opcaoEscolhida
     }
 
     function avancar() {
@@ -202,41 +268,6 @@
         window.location.reload()
     }
 
-    function checarResposta() {
-        const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual 
-        const respostaQuestaoAtual = questaoAtual.alternativaCorreta // qual é a resposta correta da questão atual
-
-        const options = document.getElementsByName("option"); // recupera alternativas no html
-
-        let alternativaCorreta = null // variável para armazenar a alternativa correta
-
-        options.forEach((option) => {
-            if (option.value === respostaQuestaoAtual) {
-                console.log("alternativaCorreta está no componente: " + alternativaCorreta)
-                alternativaCorreta = option.labels[0].id
-            }
-        })
-
-        // verifica se resposta assinalada é correta
-        options.forEach((option) => {
-            if (option.checked === true && option.value === respostaQuestaoAtual) {
-                document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
-                pontuacaoFinal++
-                certas++
-                document.getElementById("spanCertas").innerHTML = certas
-                numeroDaQuestaoAtual++
-            } else if (option.checked && option.value !== respostaQuestaoAtual) {
-                const wrongLabelId = option.labels[0].id
-
-                document.getElementById(wrongLabelId).classList.add("text-danger-with-bg")
-                document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
-                tentativaIncorreta++
-                erradas++
-                document.getElementById("spanErradas").innerHTML = erradas
-                numeroDaQuestaoAtual++
-            }
-        })
-    }
 
     function limparCoresBackgroundOpcoes() {
         const options = document.getElementsByName("option");
