@@ -29,6 +29,36 @@ button {
     font-weight: bold;
 }
 
+.radio {
+    display: none;
+}
+
+.option {
+    display: block;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: solid 3px;
+    border-color: #990c19;
+    
+}
+
+.destaque {
+    font-size: 30px;
+}
+
+.cima {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.centro {
+    align-items: center;
+    align-self: center;
+}
+
 .flex-colunar {
     display: flex;
     flex-direction: column;
@@ -52,6 +82,7 @@ button {
 
 .text-bold {
     font-weight: bold;
+    font-size: 20px;
 }
 
 .text-success-with-bg {

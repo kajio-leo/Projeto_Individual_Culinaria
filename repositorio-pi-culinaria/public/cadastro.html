@@ -109,10 +109,31 @@
     var confirmacaoSenhaVar = confirmacao_senha_input.value.trim();
     let i = 0;
     let temArroba = false
+    let temMaiusculo = false
+    let temMinusculo = false
+    let temEspecial = false
+    let vt_caractereEspec = ['!', '@', '#', '$', '%', '&', '*', '(', ')', '-', '_', '/', '?', '"', '+', '|', '=', ',', '.', ':', ';', '<', '>', '[', ']', '^', '{', '}', '~', '`', '£', '¢', 'ç']
 
     while (i < emailVar.length) {
       if (emailVar[i] == '@') {
         temArroba = true
+      }
+      i++
+    }
+    i = 0;
+    while (i < senhaVar.length) {
+      if (senhaVar[i] == (senhaVar[i]).toLowerCase()) {
+        temMinusculo = true
+      }
+      if (senhaVar[i] == (senhaVar[i]).toUpperCase()) {
+        temMaiusculo = true
+      }
+      for (let index = 0; index < vt_caractereEspec.length; index++) {
+        if (senhaVar[i] == vt_caractereEspec[index]) {
+          temEspecial = true
+          break
+        }
+        
       }
       i++
     }
@@ -131,10 +152,43 @@
       finalizarAguardar();
       return false;
     }
+    
     if (temArroba == false) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
         "E-mail inválido, todo e-mail tem um @";
+
+      finalizarAguardar();
+      return false;
+    }
+    if (temMaiusculo == false) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "Senha inválida, é necessário que tenha ao menos uma letra maiúscula";
+
+      finalizarAguardar();
+      return false;
+    }
+    if (temMinusculo == false) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "Senha inválida, é necessário que tenha ao menos uma letra minúscula";
+
+      finalizarAguardar();
+      return false;
+    }
+    if (temEspecial == false) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "Senha inválida, é necessário que tenha ao menos um caractere especial";
+
+      finalizarAguardar();
+      return false;
+    }
+    if (senhaVar.length < 8) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "Senha inválida, é necessário conter ao menos 8 caracteres";
 
       finalizarAguardar();
       return false;
@@ -177,7 +231,7 @@
             "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
           setTimeout(() => {
-            window.location = "login.html";
+            window.location = "../DOCUMENTOS_DE_APOIO/exemplo_de_quiz/EXEMPLO_QUIZZ.html";
           }, "2000");
 
           limparFormulario();
@@ -192,26 +246,6 @@
       });
 
     return false;
-  }
-
-  // Listando empresas cadastradas 
-  function listar() {
-    fetch("/empresas/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaEmpresasCadastradas.push(empresa);
-
-            console.log("listaEmpresasCadastradas")
-            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
-          });
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
   }
 
   function sumirMensagem() {
