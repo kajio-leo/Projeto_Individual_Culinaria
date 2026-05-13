@@ -10,8 +10,8 @@
 
 
 <body onload="onloadEsconder()">
-    <div id="pontuacaoEJogo">
-        <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
+    <div id="pontuacaoEJogo" class="container">
+        <button id="btnIniciarQuiz" class="btnInicio" onclick="iniciarQuiz()">INICIAR QUIZ</button>
 
         <div id="jogo" class="width-fit-content flex-colunar border-secondary">
             <div id="topo" class="cima">
@@ -25,8 +25,8 @@
                 </div>
             </div>
 
-            <div id="infoAlternativas" class="padding-8">
-                <span><em>Escolha uma opção dentre as abaixo:</em></span>
+            <div id="infoAlternativas" class="padding-8L">
+                <span style="font-size: 14px;"><em>Escolha uma opção dentre as abaixo:</em></span>
             </div>
 
             <div id="opcoes" class="flex-colunar padding-8">
@@ -52,8 +52,8 @@
                 </span>
             </div>
 
-            <div id="botoes" class="flex-colunar padding-8">
-                <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
+            <div id="botoes" class="btnOpcao">
+                <button onclick="submeter()" class="btnProx" id="btnSubmeter">Próxima pergunta</button>
                 <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
             </div>
 
