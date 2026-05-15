@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exemplo - Quiz</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 
@@ -126,7 +126,7 @@
         },
 
         {
-            pergunta: "Com que frequência você se reune para comer com sua família (avós, avôs, tios e tias)?",
+            pergunta: "Com que frequência você se reúne para comer com sua família (pais, avós, avôs, tios e tias)?",
             alternativaA: "4 ou mais vezes por mês",
             alternativaB: "2-3 vezes por mês",
             alternativaC: "1 vez por mês",
@@ -206,7 +206,8 @@
             if (options[i].checked) {
                 hasChecked = true
                 let respostaUsua = {
-                    pergunta: listaDeQuestoes[numeroDaQuestaoAtual].pergunta,
+                    alternativa: options[i].value,
+                //perguntar sobre isso, o que ele retorna    alternativa: options[i].checked.value,
                     resposta: options[i].labels[0].innerHTML
                 }
                 vt_respostas.push(respostaUsua)
@@ -256,7 +257,46 @@
     }
 
     function finalizarJogo() {
+            guardar()
+    }
+
+    function guardar() {
+        let idUsuario = sessionStorage.getItem("ID_USUARIO")
+
+        fetch("/quizzes/guardar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        respostasServer: vt_respostas,
+        id: idUsuario
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Quiz realizado com sucesso! Redirecionando para a dashboard";
+
             alert(`Quiz concluido`)
             window.location = '../../public/login.html'
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar salvar o quiz";
+        }
+        
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
     }
 </script>

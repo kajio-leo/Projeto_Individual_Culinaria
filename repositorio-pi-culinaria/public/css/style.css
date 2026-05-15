@@ -65,6 +65,12 @@ body {
     padding-bottom: 18px;
 }
 
+.radio:checked + .option {
+    background-color: #cb7171;
+    border: 2px solid #c62020;
+    color: white;
+}
+
 .btnProx {
     padding: 1%;
     font-family: 'Poppins';
