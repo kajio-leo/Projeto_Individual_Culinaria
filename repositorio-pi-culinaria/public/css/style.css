@@ -101,7 +101,7 @@ body {
 }
 
 .width-fit-content {
-    width: fit-content;
+    min-width: 75vh;
 }
 
 .border-primary {

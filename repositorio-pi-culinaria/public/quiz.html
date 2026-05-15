@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exemplo - Quiz</title>
+
+    <script src="./js/sessao.js"></script>
+
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
@@ -277,24 +280,22 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "block";
 
-          mensagem_erro.innerHTML =
-            "Quiz realizado com sucesso! Redirecionando para a dashboard";
+          alert ("Quiz realizado com sucesso! Redirecionando para a dashboard")
+            
 
-            alert(`Quiz concluido`)
-            window.location = '../../public/login.html'
+            setTimeout(() => {
+            window.location = "./dashboard/cards.html";
+          }, "4000");
 
-          limparFormulario();
-          finalizarAguardar();
         } else {
           throw "Houve um erro ao tentar salvar o quiz";
         }
         
       })
-      .catch(function (resposta) {
+      .catch(function (erro) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
+
       });
 
     return false;
