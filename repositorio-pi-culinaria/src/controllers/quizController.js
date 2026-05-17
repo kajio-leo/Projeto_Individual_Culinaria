@@ -25,6 +25,34 @@ function guardar(req, res) {
     }
 }
 
+function temnobanco(req, res) {
+    var idUser = req.body.id;
+
+    if (idUser == undefined) {
+        res.status(400).send("Seu id do usuário está undefined!");
+    } else {
+
+        quizModel.temnobanco(idUser)
+            .then(
+                function (resultadoAutenticar) {
+                        console.log(resultadoAutenticar);
+
+                        res.json({
+                            tem: resultadoAutenticar[0]["qtdResp"] > 0
+                        })
+                    }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao verificar se ja fez o quiz", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
+
 module.exports = {
-    guardar
+    guardar,
+    temnobanco
 }
