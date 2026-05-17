@@ -7,4 +7,8 @@ router.post("/favoritar", function (req, res) {
     favoritoController.favoritar(req, res);
 }) 
 
+router.post("/favoritado", function (req, res) {
+    favoritoController.favoritado(req, res);
+}) 
+
 module.exports = router;

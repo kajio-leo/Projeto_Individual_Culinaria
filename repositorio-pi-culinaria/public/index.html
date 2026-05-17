@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body>
+<body onload="verFavoritado(2); verFavoritado(3); verFavoritado(4); verFavoritado(7); verFavoritado(8); verFavoritado(9);">
     <div class="header">
       <div class="container">
         <h1 class="titulo">
@@ -57,36 +57,54 @@
         </div>
         <div class="boxes">
           <div class="box">
-            <a href=""><img src="assets/imgs/cookies.jpg">
-            <p><span style="color: #c62020;">Costelinha oriental</span><br>
-              Saborosa costelinha japonesa em molho agridoce</p></a>
+            <a href=""><img src="assets/imgs/cookies.jpg"></a>
+            <div class="descrRec">
+              <p><span style="color: #c62020;">Costelinha oriental</span><br>
+              Saborosa costelinha japonesa em molho agridoce</p>
+              <button id="7" class="botaoFavorito" onclick="favoritar(this)">🤍</button>
+            </div>
           </div>
           <div class="box">
-            <a href=""><img src="assets/imgs/bolo de cenoura.jpg">
-            <p><span style="color: #c62020;">Bolo de cenoura</span><br>
-              Receita da vovó do bolo de cenoura fofinho</p></a>
+            <a href=""><img src="assets/imgs/bolo de cenoura.jpg"></a>
+            <div class="descrRec">
+              <p><span style="color: #c62020;">Bolo de cenoura</span><br>
+              Receita da vovó do bolo de cenoura fofinho</p>
+              <button id="2" class="botaoFavorito" onclick="favoritar(this)">🤍</button>
+            </div>
           </div>
           <div class="box">
-            <a href=""><img src="assets/imgs/frango-com-quiabo-1010.jpg">
-            <p><span style="color: #c62020;">Frango com quiabo</span> <br>
-              O suculento frango com quiabo do vovô</p></a>
+            <a href=""><img src="assets/imgs/frango-com-quiabo-1010.jpg"></a>
+            <div class="descrRec">
+              <p><span style="color: #c62020;">Frango com quiabo</span> <br>
+              O suculento frango com quiabo do vovô</p>
+              <button id="8" class="botaoFavorito" onclick="favoritar(this)">🤍</button>
+            </div>
           </div>
         </div>
         <div class="boxes">
           <div class="box">
-            <a href=""><img src="assets/imgs/mousse.jpg">
-            <p><span style="color: #c62020;">Mousse de chocolate</span><br>
-            Um pedacinho do céu que derrete na boca</p></a>
+            <a href=""><img src="assets/imgs/mousse.jpg"></a>
+            <div class="descrRec">
+              <p><span style="color: #c62020;">Mousse de chocolate</span><br>
+              Um pedacinho do céu que derrete na boca</p>
+              <button id="3" class="botaoFavorito" onclick="favoritar(this)">🤍</button>
+            </div>
           </div>
           <div class="box">
-            <a href=""><img src="assets/imgs/hotdog.jpg">
-            <p><span style="color: #c62020;">Hot Dog</span><br>
-            Apetitoso Hot Dog, ideal para fazer com as crianças</p></a>
+            <a href=""><img src="assets/imgs/hotdog.jpg"></a>
+            <div class="descrRec">
+              <p><span style="color: #c62020;">Hot Dog</span><br>
+              Apetitoso Hot Dog, ideal para fazer com as crianças</p>
+              <button id="9" class="botaoFavorito" onclick="favoritar(this)">🤍</button>
+            </div>
           </div>
           <div class="box">
-            <a href=""><img src="assets/imgs/bolo de limao.jpg">
-            <p><span style="color: #c62020;">Bolo de limão</span><br>
-            Azedinho e macio, bolo perfeito para o café da tarde em família</p></a>
+            <a href=""><img src="assets/imgs/bolo de limao.jpg"></a>
+            <div class="descrRec">
+              <p><span style="color: #c62020;">Bolo de limão</span><br>
+              Azedinho e macio, bolo perfeito para o café da tarde em família</p>
+              <button id="4" class="botaoFavorito" onclick="favoritar(this)">🤍</button>
+            </div>
           </div>
         </div>
       </div>
@@ -101,3 +119,39 @@
   </body>
 
 </html>
+
+<script>
+
+function verFavoritado(idReceita) {
+      let idUsuario = sessionStorage.getItem("ID_USUARIO");
+      
+      if (idUsuario == null) {
+        return
+      }
+
+      fetch("/favoritos/favoritado", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: idUsuario,
+        idReceita: idReceita
+      }),
+    })
+
+      .then(function (resposta) {
+        return resposta.json();
+    })
+    .then(function (resultado) {
+        if (resultado.ja) {
+            document.getElementById(idReceita).innerHTML = "❤️";
+            document.getElementById(idReceita).disabled = true;
+        }
+    })
+    .catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+    });
+  }
+
+</script>
