@@ -16,6 +16,11 @@
 </head>
 
 <body onload="verFavoritado(2); verFavoritado(3); verFavoritado(4); verFavoritado(7); verFavoritado(8); verFavoritado(9);">
+    <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
+            </div>
+    </div>
     <div class="header">
       <div class="container">
         <h1 class="titulo">
@@ -122,6 +127,57 @@
 
 <script>
 
+
+function favoritar(botaoFav) {
+        let idReceita = botaoFav.id
+        let idUsuario = sessionStorage.getItem("ID_USUARIO")
+
+        if (idUsuario == undefined) {
+          console.log('cai no if')
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Entre com a sua conta para salvar a receita como favorita";
+          
+          setTimeout(() => {
+            cardErro.style.display = "none";
+          }, "4000");
+          return
+        }
+
+        fetch("/favoritos/favoritar", {
+          method: "POST",
+          headers: {
+          "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+          receitasServer: idReceita,
+          id: idUsuario
+          }),
+        })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          botaoFav.innerHTML = "❤️"
+          botaoFav.disabled = true
+          botaoFav.style.opacity = 1;
+            
+
+        } else {
+          throw "Houve um erro ao tentar favoritar a receita";
+        }
+        
+      })
+      .catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+
+      });
+
+    return false;
+  }
+
+
 function verFavoritado(idReceita) {
       let idUsuario = sessionStorage.getItem("ID_USUARIO");
       
@@ -147,6 +203,7 @@ function verFavoritado(idReceita) {
         if (resultado.ja) {
             document.getElementById(idReceita).innerHTML = "❤️";
             document.getElementById(idReceita).disabled = true;
+            document.getElementById(idReceita).style.opacity = 1;
         }
     })
     .catch(function (erro) {

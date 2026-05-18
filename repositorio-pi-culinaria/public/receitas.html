@@ -16,6 +16,11 @@
 </head>
 
 <body onload="verFavoritado(1); verFavoritado(2); verFavoritado(3); verFavoritado(4); verFavoritado(5); verFavoritado(6); verFavoritado(7); verFavoritado(8); verFavoritado(9); verFavoritado(10); verFavoritado(11); verFavoritado(12)">
+    <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
+            </div>
+    </div>
     <div class="header">
       <div class="container">
         <h1 class="titulo">
@@ -36,7 +41,7 @@
     </div>
   
     
-  
+    
     <div class="social">
       <div class="container">
         <div class="tituloRec">
@@ -165,6 +170,19 @@
 function favoritar(botaoFav) {
         let idReceita = botaoFav.id
         let idUsuario = sessionStorage.getItem("ID_USUARIO")
+
+        if (idUsuario == undefined) {
+          console.log('cai no if')
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Entre com a sua conta para salvar a receita como favorita";
+          
+          setTimeout(() => {
+            cardErro.style.display = "none";
+          }, "4000");
+          return
+        }
 
         fetch("/favoritos/favoritar", {
           method: "POST",
