@@ -1,5 +1,6 @@
 var usuarioModel = require("../models/usuarioModel");
-var aquarioModel = require("../models/aquarioModel");
+var favoritoModel = require("../models/favoritoModel");
+const { favoritado } = require("./favoritoController");
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -20,11 +21,16 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
 
-                        res.json({
-                            id: resultadoAutenticar[0].id,
-                            email: resultadoAutenticar[0].email,
-                            nome: resultadoAutenticar[0].nome
-                        })
+                        favoritoModel.buscarFavoritadosPorUsuario(resultadoAutenticar[0].id)
+                            .then((resultadoFavoritos) => {
+                                res.json({
+                                    id: resultadoAutenticar[0].id,
+                                    email: resultadoAutenticar[0].email,
+                                    nome: resultadoAutenticar[0].nome,
+                                    favoritos: resultadoFavoritos
+                                })  
+                            })
+                        
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
@@ -79,5 +85,5 @@ function cadastrar(req, res) {
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
 }

@@ -133,7 +133,6 @@ function favoritar(botaoFav) {
         let idUsuario = sessionStorage.getItem("ID_USUARIO")
 
         if (idUsuario == undefined) {
-          console.log('cai no if')
           cardErro.style.display = "block";
 
           mensagem_erro.innerHTML =

@@ -21,7 +21,16 @@ function favoritado(idUser, idRec) {
     
 }
 
+function buscarFavoritadosPorUsuario(idUser) {
+
+  var instrucaoSql = `SELECT nome, descr FROM vw_card WHERE id = ${idUser}`;
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
 module.exports = {
     favoritar,
-    favoritado
+    favoritado,
+    buscarFavoritadosPorUsuario
 };

@@ -34,23 +34,19 @@
                 <h4>E-mail: <span id="b_email">e-mail</span>!</h4>
                 <br>
             </div>
-
             <div class="btn-nav">
                 <h3>Aquários</h3>
             </div>
-
             <div class="btn-nav-white">
                 <a href="./dashboard.html">
                     <h3>Gráficos</h3>
                 </a>
             </div>
-
             <div class="btn-nav-white">
                 <a href="./mural.html">
                     <h3>Mural de Avisos</h3>
                 </a>
             </div>
-
             <div class="btn-logout" onclick="limparSessao()">
                 <h3>Sair</h3>
             </div>
@@ -60,36 +56,7 @@
         <div class="dash">
             <div id="alerta">
             </div>
-            <div class="area-parametros-alerta">
-                <p class="titulo-legenda">
-                    Legenda - Parâmetros para Alertas
-                </p>
-                <div class="parametros-alerta">
-                    <div class="item-regua perigo-frio">
-                        <p>Perigo</p>
-                        <p>&lt;=5°C</p>
-                    </div>
-                    <div class="item-regua alerta-frio">
-                        <p>Alerta</p>
-                        <p>&lt;=10°C</p>
-                    </div>
-                    <div class="item-regua ideal">
-                        <p>Ideal</p>
-                        <p>20°C</p>
-                    </div>
-                    <div class="item-regua alerta-quente">
-                        <p>Alerta</p>
-                        <p>&gt;=22°C</p>
-                    </div>
-                    <div class="item-regua perigo-quente">
-                        <p>Perigo</p>
-                        <p>&gt;=23°C</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cards" id="cardAquarios">
-
+            <div class="cards" id="cardFavoritos">
             </div>
 
         </div>
@@ -101,21 +68,45 @@
 <script>
 
     function exibirAquarios() {
-        JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-            document.getElementById("cardAquarios").innerHTML += `
-                    <div class="card-aquario">
-                        <div class="title-aquario">
-                            <h1>${item.descricao}</h1>
+       /*
+        JSON.parse(sessionStorage.FAVORITOS).forEach(item => {
+            document.getElementById("cardFavoritos").innerHTML += `
+                    <div class="card-favorito">
+                        <div class="title-favorito">
+                            <h1>${item.nome}</h1>
                         </div>
-                        <div class="desc-aquario">
-                        <div class="temperatura">
-                            <p id="temp_aquario_${item.id}">-°C</p>
+                        <div class="desc-favorito">
+                            <p>${item.descr}</p>
                         </div>
                         <div class="cor-alerta" id="card_${item.id}"></div>
                     </div>
                     </div>
                     `
         });
+        */
+        
+        var vt_favoritos = JSON.parse(sessionStorage.FAVORITOS);
+
+        if (vt_favoritos.length == 0) {
+        document.getElementById("cardFavoritos").innerHTML = "<p>Você ainda não favoritou nenhuma receita!</p>";
+        return;
+        }
+
+        let i = 0;
+        while (i < 3) {
+            document.getElementById("cardFavoritos").innerHTML += `
+                    <div class="card-favorito">
+                        <div class="title-favorito">
+                            <h1>${vt_favoritos[i].nome}</h1>
+                        </div>
+                        <div class="desc-favorito">
+                            <p>${vt_favoritos[i].descr}</p>
+                        </div>
+                    </div>
+                    </div>
+                    `
+            i++
+        }
     }
 
 </script>

@@ -13,6 +13,11 @@
 
 
 <body onload="onloadEsconder()">
+    <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
+            </div>
+    </div>
     <div id="pontuacaoEJogo" class="container">
         <button id="btnIniciarQuiz" class="btnInicio" onclick="iniciarQuiz()">INICIAR QUIZ</button>
 
@@ -219,7 +224,15 @@
         }
 
         if (!hasChecked) {
-            alert("Escolha uma opção antes de seguir em frente")
+            cardErro.style.display = "block";
+
+            mensagem_erro.innerHTML =
+            "Selecione uma alternativa antes de seguir em frente";
+          
+            setTimeout(() => {
+            cardErro.style.display = "none";
+            }, "4000");
+          return
         } else {    
             
             numeroDaQuestaoAtual++
@@ -281,7 +294,10 @@
 
         if (resposta.ok) {
 
-          alert ("Quiz realizado com sucesso! Redirecionando para a dashboard")
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Quiz realizado com sucesso, redirecionando para a página do perfil";
             
 
             setTimeout(() => {
