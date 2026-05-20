@@ -26,26 +26,29 @@
 
         <div class="header-left dash-header">
 
-            <h1>AquaTech</h1>
+            <h1>Companheiros <br> Cozinheiros</h1>
 
-            <div class="hello">
-                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-                <br>
-                <h4>E-mail: <span id="b_email">e-mail</span>!</h4>
-                <br>
-            </div>
+            
             <div class="btn-nav">
-                <h3>Aquários</h3>
-            </div>
-            <div class="btn-nav-white">
-                <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
+                <a href="#">
+                    <h3>Perfil</h3>
                 </a>
             </div>
             <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
+                <a href="./recfavoritas.html">
+                    <h3>Receitas Favoritas</h3>
                 </a>
+            </div>
+            <div class="btn-nav-white">
+                <a href="../quiz.html">
+                    <h3>Quiz</h3>
+                </a>
+            </div>
+            <div class="btn-nav-white">
+                <a href="../index.html">
+                    <h3>Voltar</h3>
+                </a>
+                
             </div>
             <div class="btn-logout" onclick="limparSessao()">
                 <h3>Sair</h3>
@@ -53,12 +56,28 @@
 
         </div>
 
-        <div class="dash">
-            <div id="alerta">
-            </div>
-            <div class="cards" id="cardFavoritos">
-            </div>
+        <div class="perfil">
+            <div class="infos">
+                <div class="bannertopo">
+                    <div class="hello">
+                        <h2>Olá, <span id="b_usuario">usuário</span>, seja bem vindo de volta!</h2>
+                    </div>
+                </div>
+                <div class="kpis">
+                    <div class="kpi-topo">
 
+                    </div>
+                    <div class="kpi-body">
+
+                    </div>
+                </div>
+            </div>
+            <div class="favoritos-cards">
+                <h3 style="margin-top: 20px;">Ultimas</h3>
+                <h3 style="margin-bottom: 20px;">Favoritas</h3>
+                <div class="cards" id="cardFavoritos">
+                </div>
+            </div>
         </div>
 
     </div>
@@ -68,24 +87,9 @@
 <script>
 
     function exibirAquarios() {
-       /*
-        JSON.parse(sessionStorage.FAVORITOS).forEach(item => {
-            document.getElementById("cardFavoritos").innerHTML += `
-                    <div class="card-favorito">
-                        <div class="title-favorito">
-                            <h1>${item.nome}</h1>
-                        </div>
-                        <div class="desc-favorito">
-                            <p>${item.descr}</p>
-                        </div>
-                        <div class="cor-alerta" id="card_${item.id}"></div>
-                    </div>
-                    </div>
-                    `
-        });
-        */
         
         var vt_favoritos = JSON.parse(sessionStorage.FAVORITOS);
+        
 
         if (vt_favoritos.length == 0) {
         document.getElementById("cardFavoritos").innerHTML = "<p>Você ainda não favoritou nenhuma receita!</p>";
@@ -95,6 +99,7 @@
         let i = 0;
         while (i < 3) {
             document.getElementById("cardFavoritos").innerHTML += `
+                <a href="../receita${vt_favoritos[i].idRec}">
                     <div class="card-favorito">
                         <div class="title-favorito">
                             <h1>${vt_favoritos[i].nome}</h1>
@@ -104,7 +109,7 @@
                         </div>
                     </div>
                     </div>
-                    `
+                </a>`
             i++
         }
     }

@@ -8,6 +8,31 @@ body {
   font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.perfil {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  position: relative;
+  top: 0;
+  left: 20%;
+  background-color: white;
+  height: 100vh;
+  overflow: auto;
+}
+
+.infos {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  background-color: white ;
+}
+
+.kpi-topo {
+  display: flex;
+  flex-direction: row;
+}
+
 .label-captura {
   display: flex;
   justify-content: center;
@@ -111,11 +136,11 @@ body {
 
 /* pagina graficos */
 
-.dash-header {
-  background-color: #212124;
-}
+
 
 .dash {
+  display: flex;
+  flex-direction: column;
   width: 80%;
   position: relative;
   top: 0;
@@ -188,37 +213,70 @@ body {
 
 .cards {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  height: 450px;
+  flex-direction: column;
+  height: 100%;
   width: 100%;
-  align-items: center;
+  align-items: flex-end;
   color: white;
+  
+}
+
+.favoritos-cards {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 30%;
+  align-items: flex-end;
+  color: #c62020;
+  border-left: 3px solid #c62020;
+}
+
+.favoritos-cards h3 {
+  font-size: 24px;
+  align-self: center;
+  margin: 0;
+}
+
+.cards a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .card-favorito {
   margin: 2%;
-  min-width: 40%;
-  max-width: 50%;
+  min-width: 30%;
+  max-width: 100%;
   width: fit-content;
   flex-wrap: wrap;
   display: flex;
   /* text-align: center; */
-  height: 180px;
+  height: 130px;
   /* justify-content: right; */
-  background-color: #212124;
+  background-color: #c62020;
   font-size: 20px;
 }
 
-.card-aquario h1 {
+.card-favorito h1 {
   width: fit-content;
 }
 
-.card-aquario p {
+.card-favorito .title-favorito h1 {
   margin: 0;
-  font-size: 50px;
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.card-favorito p {
+  margin: 0;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  font-size: 14px;
   font-weight: lighter;
   text-align: left;
+  font-weight: 400;
 }
 
 .desc-favorito {
@@ -329,6 +387,7 @@ canvas {
 
 .janela {
   display: flex;
+  flex-direction: row;
   /* width: 100vw; */
 }
 
@@ -336,6 +395,8 @@ canvas {
   text-decoration: none;
   color: white;
 }
+
+
 
 .header-left {
   position: fixed;
@@ -348,9 +409,11 @@ canvas {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  border-right: 3px solid #32b9cd;
-  background-color: #212124;
+  border-right: 3px solid #c62020;
+  background-color: rgb(255, 249, 241);
 }
+
+
 
 .dash-right {
   display: flex;
@@ -365,13 +428,16 @@ canvas {
 }
 
 .header-left h1 {
-  color: #32b9cd;
+  color: #c62020;
 }
 
 .hello {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  color: #c62020;
+}
+
+.hello h2 {
+  margin: 0;
+  margin-left: 10px;
 }
 
 .hello h3 {
@@ -393,23 +459,33 @@ canvas {
 .btn-nav {
   width: 40%;
   color: white;
-  background-color: #e6005a;
+  background-color: #c62020;
   border-radius: 5px;
   text-align: center;
   padding: 2% 5%;
+  transition: 0.3;
+}
+
+.btn-nav:hover {
+  transform: scale(1.1  );
 }
 
 .btn-nav-white {
   width: 40%;
   background-color: white;
-  border: 3px solid #e6005a;
+  border: 3px solid #c62020;
   border-radius: 5px;
   text-align: center;
   padding: 2% 5%;
+  transition: 0.3;
+}
+
+.btn-nav-white:hover {
+  transform: scale(1.1);
 }
 
 .btn-nav-white h3 {
-  color: #e6005a;
+  color: #c62020;
   padding: 0;
   margin: 0;
 }
@@ -424,11 +500,17 @@ canvas {
   margin: 0;
   padding: 0;
   width: 20%;
-  background-color: #32b9cd;
+  background-color: #520404;
   color: white;
   border-radius: 10px;
   text-align: center;
   padding: 10px 15px;
-  margin-bottom: 100px;
+  margin-bottom: 20px;
+  margin-top: 80px;
   cursor: pointer;
+  transition: 0.3;
+}
+
+.btn-logout:hover {
+  transform: scale(1.1);
 }

@@ -95,8 +95,13 @@
 
 <script>
 
-  // Array para armazenar empresas cadastradas para validação de código de ativação 
-  let listaEmpresasCadastradas = [];
+  function entrou() {
+    if (sessionStorage.ID_USUARIO != undefined) {
+      document.getElementById("login").innerHTML = "Perfil"
+    }
+}
+
+
 
   function cadastrar() {
     // aguardar();

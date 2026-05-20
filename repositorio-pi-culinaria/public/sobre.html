@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body>
+<body onload="entrou()">
 
     <!--header inicio-->
     <div class="header">
@@ -29,7 +29,7 @@
                 </li>
                 <li class="agora">Sobre</li>
                 <li>
-                    <a href="./login.html">Login</a>
+                    <a id="login" href="./login.html">Login</a>
                 </li>
             </ul>
         </div>
@@ -72,3 +72,12 @@
 </body>
 
 </html>
+<script>
+
+    function entrou() {
+    if (sessionStorage.ID_USUARIO != undefined) {
+      document.getElementById("login").innerHTML = "Perfil"
+    }
+}
+
+</script>

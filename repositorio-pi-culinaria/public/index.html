@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body onload="verFavoritado(2); verFavoritado(3); verFavoritado(4); verFavoritado(7); verFavoritado(8); verFavoritado(9);">
+<body onload="entrou(); verFavoritado(2); verFavoritado(3); verFavoritado(4); verFavoritado(7); verFavoritado(8); verFavoritado(9);">
     <div class="alerta_erro">
             <div class="card_erro" id="cardErro">
                 <span id="mensagem_erro"></span>
@@ -34,7 +34,7 @@
             <a href="sobre.html">Sobre</a>
           </li>
           <li>
-            <a href="login.html">Login</a>
+            <a id="login" href="login.html">Login</a>
           </li>
         </ul>
       </div>
@@ -126,6 +126,12 @@
 </html>
 
 <script>
+
+function entrou() {
+    if (sessionStorage.ID_USUARIO != undefined) {
+      document.getElementById("login").innerHTML = "Perfil"
+    }
+}
 
 
 function favoritar(botaoFav) {

@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body>
+<body onload="entrou(); logado()">
 
     <!--Header-->
 
@@ -32,7 +32,7 @@
                     <a href="sobre.html">Sobre</a>
                 </li>
                 <li class="agora">
-                    <a href="#">Login</a>
+                    <a id="login" href="#">Login</a>
                 </li>
             </ul>
         </div>
@@ -84,6 +84,18 @@
 </html>
 
 <script>
+
+    function entrou() {
+        if (sessionStorage.ID_USUARIO != undefined) {
+            document.getElementById("login").innerHTML = "Perfil"
+        }
+    }
+
+    function logado() {
+        if (sessionStorage.ID_USUARIO != undefined) {
+            window.location = "./dashboard/cards.html"
+        }
+    }
 
 
     function entrar() {
