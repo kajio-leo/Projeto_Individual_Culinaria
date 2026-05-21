@@ -28,7 +28,7 @@
 
 <!-- <body onload=" atualizarFeed()"> -->
 
-<body>
+<body onload="exibirAquarios()">
 
     <div class="janela">
         <div class="header-left">
@@ -62,14 +62,18 @@
 
         </div>
 
-        <div class="dash">
-            <div id="alerta">
+        <div class="perfil">
+            <div class="favoritas">
+                <div class="cards" id="cardFavoritos1">
+                </div>
             </div>
-
-            <div class="btns-dash" id="btnAquario">
-                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
+            <div class="favoritas">
+                <div class="cards" id="cardFavoritos2">
+                </div>
             </div>
-            <div id="graficos">
+            <div class="favoritas">
+                <div class="cards" id="cardFavoritos3">
+                </div>
             </div>
         </div>
     </div>
@@ -83,6 +87,64 @@
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
     b_email.innerHTML = sessionStorage.EMAIL_USUARIO;
    // b_cpf.innerHTML = sessionStorage.CPF_USUARIO;
+
+   function exibirAquarios() {
+        
+        var vt_favoritos = JSON.parse(sessionStorage.FAVORITOS);
+        
+
+        if (vt_favoritos.length == 0) {
+        document.getElementById("cardFavoritos1").innerHTML = "<p>Você ainda não favoritou nenhuma receita!</p>";
+        return;
+        }
+
+        let i = 0;
+        while (i < 4) {
+            document.getElementById("cardFavoritos1").innerHTML += `
+                <a href="../receita${vt_favoritos[i].idRec}">
+                    <div class="card-favorito-dash">
+                        <div class="title-favorito">
+                            <h1>${vt_favoritos[i].nome}</h1>
+                        </div>
+                        <div class="desc-favorito">
+                            <p>${vt_favoritos[i].descr}</p>
+                        </div>
+                    </div>
+                    </div>
+                </a>`
+            i++
+        }
+        while (i < 8) {
+            document.getElementById("cardFavoritos2").innerHTML += `
+                <a href="../receita${vt_favoritos[i].idRec}">
+                    <div class="card-favorito-dash">
+                        <div class="title-favorito">
+                            <h1>${vt_favoritos[i].nome}</h1>
+                        </div>
+                        <div class="desc-favorito">
+                            <p>${vt_favoritos[i].descr}</p>
+                        </div>
+                    </div>
+                    </div>
+                </a>`
+            i++
+        }
+        while (i < 12) {
+            document.getElementById("cardFavoritos3").innerHTML += `
+                <a href="../receita${vt_favoritos[i].idRec}">
+                    <div class="card-favorito-dash">
+                        <div class="title-favorito">
+                            <h1>${vt_favoritos[i].nome}</h1>
+                        </div>
+                        <div class="desc-favorito">
+                            <p>${vt_favoritos[i].descr}</p>
+                        </div>
+                    </div>
+                    </div>
+                </a>`
+            i++
+        }
+    }
 
     let proximaAtualizacao;
 
