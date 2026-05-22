@@ -13,13 +13,14 @@
     <link rel="stylesheet" href="./../css/estilo.css" />
 
     <script src="../js/sessao.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), exibirAquarios(), obterKpi1(), obterKpi2()">
+<body onload="validarSessao(), exibirAquarios(), obterKpi1(), obterKpi2(), obterGrafico2()">
 
     <div class="janela">
 
@@ -65,18 +66,35 @@
                 <div class="kpis">
                     <div class="kpi-topo">
                         <div class="kpi-card">
-                            <h3 id="kpi1-opc"></h3>
-                            <h1 id="kpi1-porc"></h1>
-                            <p id="kpi1-text"></p>
+                            <div class="kpi-card-body">
+                                <div class="kpi-titulo">
+                                    <h3 id="kpi1-opc"></h3>
+                                </div>
+                                <div class="kpi-meio">
+                                    <h1 id="kpi1-porc"></h1>
+                                </div>
+                                <div class="kpi-baixo">
+                                    <p id="kpi1-text"></p>
+                                </div>
+                            </div>
                         </div>
                         <div class="kpi-card">
-                            <h3 id="kpi2-text1"></h3>
-                            <h1 id="kpi2-nome"></h1>
-                            <p id="kpi2-text2"></p>
+                            <div class="kpi-card-body">
+                                <div class="kpi-titulo">
+                                    <h4 id="kpi2-text1"></h4>
+                                </div>
+                                <div class="kpi-meio">
+                                    <h1 id="kpi2-nome"></h1>
+                                </div>
+                                <div class="kpi-baixo">
+                                    <p id="kpi2-text2"></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="kpi-body">
-
+                        <div class="title-grafico">Receitas mais populares</div>
+                        <canvas id="barra"></canvas>
                     </div>
                 </div>
             </div>
@@ -270,7 +288,7 @@
                     console.log(`Dados recebidos: ${JSON.stringify(respostaGraf2)}`);
                     respostaGraf2.reverse();
 
-                    plotarGraf1(respostaGraf2);
+                    plotarGrafico2(respostaGraf2);
 
                 });
             } else {
@@ -288,7 +306,7 @@
 
         // Preenchendo os arrays com os dados
         for(var i = 0; i < respostaGraf2.length; i++){
-            qtdFavs.push(respostaGraf2[i].qtdFav);
+            numeroFavoritas.push(respostaGraf2[i].qtdFav);
             receitas.push(respostaGraf2[i].nome);
         }
 

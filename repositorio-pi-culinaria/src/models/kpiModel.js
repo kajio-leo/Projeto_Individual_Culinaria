@@ -29,7 +29,7 @@ function buscarGrafico1() {
     GROUP BY idReceita
     ORDER BY qtdFav DESC
     LIMIT 5; `
-    
+// atencao aqui    
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
     
@@ -50,5 +50,7 @@ function buscarGrafico2() {
 
 module.exports = {
     buscarKpi1,
-    buscarKpi2
+    buscarKpi2,
+    buscarGrafico1,
+    buscarGrafico2
 };

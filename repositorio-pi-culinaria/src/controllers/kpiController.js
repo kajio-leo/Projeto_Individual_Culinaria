@@ -77,5 +77,4 @@ module.exports = {
     buscarKpi2,
     buscarGrafico1,
     buscarGrafico2
-
 }
