@@ -171,19 +171,18 @@ ORDER BY f.dtFavorita DESC;
 
 SELECT idRec, nome, descr FROM vw_card WHERE id = 1;
 
-CREATE VIEW vw_kpi1 AS 
+
 SELECT r.resposta AS opcao, 
 (SELECT COUNT(r.idPergunta) FROM resposta AS r WHERE idPergunta = 1) AS qtdTotal,
 (SELECT COUNT(r.idPergunta) FROM resposta AS r WHERE resposta = opcao) AS qtdIgual 
-FROM resposta AS r WHERE idUsuario = 3 AND idPergunta = 1;
+FROM resposta AS r WHERE idUsuario = ${idUser} AND idPergunta = 1;
 
-SELECT * FROM vw_kpi1;
 
-CREATE VIEW vw_kpi2 AS
-SELECT (SELECT f.idReceita FROM favorita AS f WHERE f.idReceita IN (SELECT idReceita FROM favorita WHERE idUsuario = 1) GROUP BY f.idReceita ORDER BY COUNT(f.idReceita) LIMIT 1) AS menosPopular,
+
+
+SELECT (SELECT f.idReceita FROM favorita AS f WHERE f.idReceita IN (SELECT idReceita FROM favorita WHERE idUsuario = ${idUser}) GROUP BY f.idReceita ORDER BY COUNT(f.idReceita) LIMIT 1) AS menosPopular,
 (SELECT COUNT(f.idUsuario) FROM favorita AS f WHERE f.idReceita = 
-(SELECT f2.idReceita FROM favorita AS f2 WHERE f2.idReceita IN (SELECT idReceita FROM favorita WHERE idUsuario = 1) GROUP BY f2.idReceita ORDER BY COUNT(f2.idReceita) LIMIT 1)) AS qtdUser,
+(SELECT f2.idReceita FROM favorita AS f2 WHERE f2.idReceita IN (SELECT idReceita FROM favorita WHERE idUsuario = ${idUser}) GROUP BY f2.idReceita ORDER BY COUNT(f2.idReceita) LIMIT 1)) AS qtdUser,
 (SELECT COUNT(id) FROM usuario) AS qtdUserTot;
-
-SELECT * FROM vw_kpi2; 
+ 
 

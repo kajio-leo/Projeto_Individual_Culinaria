@@ -13,14 +13,13 @@
     <link rel="stylesheet" href="./../css/estilo.css" />
 
     <script src="../js/sessao.js"></script>
-    <script src="../js/alerta.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica()">
+<body onload="validarSessao(), exibirAquarios(), obterKpi1(), obterKpi2()">
 
     <div class="janela">
 
@@ -66,10 +65,14 @@
                 <div class="kpis">
                     <div class="kpi-topo">
                         <div class="kpi-card">
-
+                            <h3 id="kpi1-opc"></h3>
+                            <h1 id="kpi1-porc"></h1>
+                            <p id="kpi1-text"></p>
                         </div>
                         <div class="kpi-card">
-                            
+                            <h3 id="kpi2-text1"></h3>
+                            <h1 id="kpi2-nome"></h1>
+                            <p id="kpi2-text2"></p>
                         </div>
                     </div>
                     <div class="kpi-body">
@@ -118,6 +121,97 @@
             i++
         }
     }
+
+    function obterKpi1() {
+        var idUser = sessionStorage.getItem("ID_USUARIO");
+
+        fetch(`/kpis/buscar-kpi1/${idUser}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (respostaKpi1) {
+                    console.log(`Dados recebidos: ${JSON.stringify(respostaKpi1)}`);
+                    respostaKpi1.reverse();
+
+                    plotarKpi1(respostaKpi1, idUser);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ kpi1: ${error.message}`);
+            });
+    }
+
+    function plotarKpi1(respostaKpi1, idUser) {
+        console.log('iniciando plotagem da kpi1');
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterKpi1" e passados para "plotarKpi1":')
+        console.log(respostaKpi1)
+        let porcentagem = ((Number(respostaKpi1[0].qtdIgual) / Number(respostaKpi1[0].qtdTotal)) * 100).toFixed();
+        let contrario = '';
+
+        if (respostaKpi1[0].opcao == 'Doce') {
+            contrario = 'Salgado'
+        } else if (respostaKpi1[0].opcao == 'Salgado') {
+            contrario = 'Doce'
+        }
+
+
+        document.getElementById("kpi1-opc").innerHTML = respostaKpi1[0].opcao
+        document.getElementById("kpi1-porc").innerHTML = `${porcentagem}%`
+        document.getElementById("kpi1-text").innerHTML = `Você faz parte dos ${porcentagem}% que prefere ${respostaKpi1[0].opcao} à ${contrario}`
+
+    }
+
+    function obterKpi2() {
+        var idUser = sessionStorage.getItem("ID_USUARIO");
+
+        fetch(`/kpis/buscar-kpi2/${idUser}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (respostaKpi2) {
+                    console.log(`Dados recebidos: ${JSON.stringify(respostaKpi2)}`);
+                    respostaKpi2.reverse();
+
+                    plotarKpi2(respostaKpi2, idUser);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ kpi2: ${error.message}`);
+            });
+    }
+
+    function plotarKpi2(respostaKpi2, idUser) {
+        console.log('iniciando plotagem da kpi2');
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterKpi2" e passados para "plotarKpi2":')
+        console.log(respostaKpi2)
+        let vt_favoritos = JSON.parse(sessionStorage.getItem("FAVORITOS"));
+        let porcentagem = ((Number(respostaKpi2[0].qtdUser) / Number(respostaKpi2[0].qtdUserTot)) * 100).toFixed();
+        let receita = '';
+
+        for (let i = 0; i < vt_favoritos.length; i++) {
+            if (vt_favoritos[i].idRec == respostaKpi2[0].menosPopular) {
+                receita = vt_favoritos[i].nome
+            }
+        }
+
+        document.getElementById("kpi2-text1").innerHTML = 'A receita que você favoritou menos popular é:'
+        document.getElementById("kpi2-nome").innerHTML = `${receita}`
+        document.getElementById("kpi2-text2").innerHTML = `De todos os usuários somente ${porcentagem}% favoritou ela e você faz parte disso`
+
+
+
+
+    }
+
+    
+
+    
 
 </script>
 
