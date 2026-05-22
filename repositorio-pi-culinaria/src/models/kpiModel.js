@@ -22,6 +22,32 @@ function buscarKpi2(idUser) {
     return database.executar(instrucaoSql);
 }
 
+function buscarGrafico1() {
+    var instrucaoSql = `SELECT r.nome AS nome, COUNT(f.idReceita) AS qtdFav FROM favorita AS f
+    JOIN receita AS r ON r.id = f.idReceita
+    WHERE dtFavorita > '2026-05-19'
+    GROUP BY idReceita
+    ORDER BY qtdFav DESC
+    LIMIT 5; `
+    
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+    
+}
+
+function buscarGrafico2() {
+    var instrucaoSql = `SELECT r.nome AS nome, COUNT(f.idReceita) AS qtdFav FROM favorita AS f
+    JOIN receita AS r ON r.id = f.idReceita 
+    GROUP BY idReceita
+    ORDER BY qtdFav DESC
+    LIMIT 5; `
+    
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+    
+}
+
+
 module.exports = {
     buscarKpi1,
     buscarKpi2

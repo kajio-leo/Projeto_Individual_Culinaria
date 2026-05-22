@@ -209,6 +209,112 @@
 
     }
 
+
+    function obterGrafico1() {
+
+        fetch(`/kpis/buscar-graf1`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (respostaGraf1) {
+                    console.log(`Dados recebidos: ${JSON.stringify(respostaGraf1)}`);
+                    respostaGraf1.reverse();
+
+                    plotarGraf1(respostaGraf1);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico1: ${error.message}`);
+            });
+    }
+
+    function plotarGrafico1(respostaGraf1){
+        var numeroFavoritas = [];
+        var receitas = [];
+
+        // Preenchendo os arrays com os dados
+        for(var i = 0; i < respostaGraf1.length; i++){
+            qtdFavs.push(respostaGraf1[i].qtdFav);
+            receitas.push(respostaGraf1[i].nome);
+        }
+
+        // Capturando o elemento canvas pelo id 
+        var ctx = document.getElementById('barra').getContext('2d');
+        // Criando o gráfico de barra usando o Chart.js
+        var myChart = new Chart(ctx, {
+            type: 'bar', // Tipo de gráfico: barra
+            data: { // Dados para o gráfico
+                labels: receitas, // Rótulos no eixo X
+                datasets: [{
+                    label: 'Favoritos', // Nome do conjunto de dados
+                    data: numeroFavoritas, // Dados dos votos
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)', // Cor de fundo das barras
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)', // Cor da borda das barras
+                    ],
+                    borderWidth: 1 // Largura da borda das barras
+                }]
+            },
+        });
+    }
+
+    function obterGrafico2() {
+
+        fetch(`/kpis/buscar-graf2`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (respostaGraf2) {
+                    console.log(`Dados recebidos: ${JSON.stringify(respostaGraf2)}`);
+                    respostaGraf2.reverse();
+
+                    plotarGraf1(respostaGraf2);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico2: ${error.message}`);
+            });
+    }
+
+    function plotarGrafico2(respostaGraf2){
+        var numeroFavoritas = [];
+        var receitas = [];
+
+        // Preenchendo os arrays com os dados
+        for(var i = 0; i < respostaGraf2.length; i++){
+            qtdFavs.push(respostaGraf2[i].qtdFav);
+            receitas.push(respostaGraf2[i].nome);
+        }
+
+        // Capturando o elemento canvas pelo id 
+        var ctx = document.getElementById('barra').getContext('2d');
+        // Criando o gráfico de barra usando o Chart.js
+        var myChart = new Chart(ctx, {
+            type: 'bar', // Tipo de gráfico: barra
+            data: { // Dados para o gráfico
+                labels: receitas, // Rótulos no eixo X
+                datasets: [{
+                    label: 'Favoritos', // Nome do conjunto de dados
+                    data: numeroFavoritas, // Dados dos votos
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)', // Cor de fundo das barras
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)', // Cor da borda das barras
+                    ],
+                    borderWidth: 1 // Largura da borda das barras
+                }]
+            },
+        });
+    }
+
+
     
 
     

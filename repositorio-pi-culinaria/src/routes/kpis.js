@@ -11,4 +11,12 @@ router.get("/buscar-kpi2/:idUser", function (req, res) {
     kpiController.buscarKpi2(req, res);
 })
 
+router.get("/buscar-graf1", function (req, res) {
+    kpiController.buscarGrafico1(req, res);
+});
+
+router.get("/buscar-graf2", function (req, res) {
+    kpiController.buscarGrafico2(req, res);
+});
+
 module.exports = router;

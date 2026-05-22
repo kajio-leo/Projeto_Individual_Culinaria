@@ -36,7 +36,46 @@ function buscarKpi2(req, res) {
     });
 }
 
+function buscarGrafico1(req, res) {
+
+
+    console.log(`Buscando os valores do gráfico1`);
+
+    kpiModel.buscarGrafico1().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os valores do gráfico1", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarGrafico2(req, res) {
+
+
+    console.log(`Buscando os valores do gráfico2`);
+
+    kpiModel.buscarGrafico2().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os valores do gráfico2", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
     buscarKpi1,
-    buscarKpi2
+    buscarKpi2,
+    buscarGrafico1,
+    buscarGrafico2
+
 }
