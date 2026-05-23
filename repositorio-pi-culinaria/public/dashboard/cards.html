@@ -93,8 +93,12 @@
                         </div>
                     </div>
                     <div class="kpi-body">
-                        <div class="title-grafico">Receitas mais populares</div>
-                        <canvas id="barra"></canvas>
+                        <div class="title-grafico">
+                            <span>Receitas mais populares</span>
+                        </div>
+                        <div class="grafico">
+                            <canvas id="barra"></canvas>
+                        </div>     
                     </div>
                 </div>
             </div>
@@ -218,7 +222,7 @@
             }
         }
 
-        document.getElementById("kpi2-text1").innerHTML = 'A receita que você favoritou menos popular é:'
+        document.getElementById("kpi2-text1").innerHTML = 'A receita que você salvou menos popular é:'
         document.getElementById("kpi2-nome").innerHTML = `${receita}`
         document.getElementById("kpi2-text2").innerHTML = `De todos os usuários somente ${porcentagem}% favoritou ela e você faz parte disso`
 
@@ -266,7 +270,7 @@
             data: { // Dados para o gráfico
                 labels: receitas, // Rótulos no eixo X
                 datasets: [{
-                    label: 'Favoritos', // Nome do conjunto de dados
+                    label: 'Favoritados', // Nome do conjunto de dados
                     data: numeroFavoritas, // Dados dos votos
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)', // Cor de fundo das barras
@@ -277,6 +281,53 @@
                     borderWidth: 1 // Largura da borda das barras
                 }]
             },
+            options: {
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                family: 'Poppins',
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            color: '#111111'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                maxRotation: 0,
+                                minRotation: 0,
+                                font: {
+                                    family: 'Poppins',
+                                    size: 12,
+                                    weight: '400'
+                                },
+                            color: '#111111'
+                            },
+                            color: '#111111'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                family: 'Poppins',
+                                size: 13,
+                                weight: 'bold'
+                            },
+                            color: '#111111'
+                        }
+                    }
+                }
+            }
         });
     }
 
@@ -318,17 +369,61 @@
             data: { // Dados para o gráfico
                 labels: receitas, // Rótulos no eixo X
                 datasets: [{
-                    label: 'Favoritos', // Nome do conjunto de dados
+                    label: 'Favoritados', // Nome do conjunto de dados
                     data: numeroFavoritas, // Dados dos votos
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)', // Cor de fundo das barras
+                        '#c62020', // Cor de fundo das barras
                     ],
                     borderColor: [
-                        'rgba(255, 99, 132, 1)', // Cor da borda das barras
+                        '#981313', // Cor da borda das barras
                     ],
                     borderWidth: 1 // Largura da borda das barras
                 }]
             },
+            options: {
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                family: 'Poppins',
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            color: '#111111'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            maxRotation: 0,
+                            minRotation: 0,
+                            font: {
+                                family: 'Poppins',
+                                size: 11,
+                                weight: '600'
+                            },
+                            color: '#111111'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                family: 'Poppins',
+                                size: 13,
+                                weight: 'bold'
+                            },
+                            color: '#111111'
+                        }
+                    }
+                }
+            }
         });
     }
 

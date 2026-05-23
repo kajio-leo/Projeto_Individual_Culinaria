@@ -264,6 +264,14 @@ body {
     width: 100%;
 }
 
+.descrRec p {
+  width: 85%;
+}
+
+.descrRec button {
+  width: 15%;
+}
+
 .botaoFavorito {
     background: none;
     border: none;
@@ -271,6 +279,15 @@ body {
     cursor: pointer;
     transition: transform 0.2s;
 }
+
+.imgFavorito {
+  transition: transform 0.2;
+}
+
+.imgFavorito:hover {
+  transform: scale(1.1);
+}
+
 
 .botaoFavorito:hover {
     transform: scale(1.2);
