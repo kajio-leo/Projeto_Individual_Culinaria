@@ -7,10 +7,10 @@ body {
 }
 
 :root {
-  --tamanho-header: 80px;
+  --tamanho-header: 70px;
   --tamanho-banner: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) + 5px);
   --tamanho-sobre: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
-  --tamanho-login: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
+  --tamanho-login: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) + 30px);
   --tamanho-footer: 65px;
 }
 
@@ -328,15 +328,50 @@ body {
   background-size: cover;
 }
 
-.login .container {
-  justify-content: center;
-  align-items: center;
+.bodyLogin {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+
+.bannerLogin {
+  width: 50%;
   height: 100%;
 }
 
-.card {
+.bannerLogin .imagem {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.bannerLogin .imagem img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.login .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   width: 50%;
-  background-color: #dddacf;
+}
+
+.login .container .alerta_erro {
+  justify-content: flex-end;
+  height: 20%;
+  width: 100%;
+}
+
+.card {
+  min-height: 60%;
+  width: 70%;
+  background-color: #f9f9f9;
+  box-shadow: 0px 0px 10px 1px rgb(157, 157, 157);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -439,6 +474,11 @@ body {
 .alerta_erro{
   display: flex;
   justify-content: flex-end;
+}
+
+.alerta_erro2{
+  display: flex;
+  justify-content: flex-start;
 }
 
 .card_erro {
