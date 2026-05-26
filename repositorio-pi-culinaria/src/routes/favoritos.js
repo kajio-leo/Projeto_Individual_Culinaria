@@ -15,4 +15,8 @@ router.post("/buscarFavoritadosPorUsuario", function (req, res) {
     favoritoController.favoritado(req, res);
 }) 
 
+router.get("/buscarFavoritadosPorUsuario/:idUsuario", function (req, res) {
+    favoritoController.buscarFavoritadosPorUsuario(req, res);
+}) 
+
 module.exports = router;

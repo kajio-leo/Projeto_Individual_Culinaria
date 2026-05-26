@@ -165,9 +165,8 @@ INSERT INTO receitaIngrediente (idReceita, idIngrediente, quantidade, unidadeMed
     (1, 9, '170', 1),
     (1, 11, '2', 24);
 
-CREATE VIEW vw_card AS SELECT f.idUsuario AS id, f.idReceita AS idRec, r.nome AS nome, r.descricao AS descr FROM receita AS r
-JOIN favorita AS f ON f.idReceita = r.id
-ORDER BY f.dtFavorita DESC;
+CREATE VIEW vw_card AS SELECT f.idUsuario AS id, f.idReceita AS idRec, r.nome AS nome, r.descricao AS descr, f.dtFavorita AS dtFavorita FROM receita AS r
+JOIN favorita AS f ON f.idReceita = r.id;
 
 SELECT idRec, nome, descr FROM vw_card WHERE id = 1;
 

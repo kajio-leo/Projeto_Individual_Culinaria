@@ -20,7 +20,7 @@
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), exibirAquarios(), obterKpi1(), obterKpi2(), obterGrafico2()">
+<body onload="validarSessao(), verFavoritadosUser(), obterKpi1(), obterKpi2(), obterGrafico2()">
 
     <div class="janela">
 
@@ -116,8 +116,8 @@
 
 <script>
 
-    function exibirAquarios() {
-        
+    function exibirFavoritos() {
+        document.getElementById("cardFavoritos").innerHTML = "";
         var vt_favoritos = JSON.parse(sessionStorage.FAVORITOS);
         
 
@@ -127,7 +127,7 @@
         }
 
         let i = 0;
-        while (i < 3) {
+        while (i < 3 && i < vt_favoritos.length) {
             document.getElementById("cardFavoritos").innerHTML += `
                 <a href="../receita${vt_favoritos[i].idRec}">
                     <div class="card-favorito">
@@ -238,7 +238,6 @@
             if (response.ok) {
                 response.json().then(function (respostaGraf1) {
                     console.log(`Dados recebidos: ${JSON.stringify(respostaGraf1)}`);
-                    respostaGraf1.reverse();
 
                     plotarGraf1(respostaGraf1);
 
@@ -282,6 +281,9 @@
                 }]
             },
             options: {
+                hover : {
+                    mode: null
+                },
                 plugins: {
                     legend: {
                         labels: {
@@ -381,6 +383,11 @@
                 }]
             },
             options: {
+                responsive: false,
+                maintainAspectRatio: false,
+                hover : {
+                    mode: null
+                },
                 plugins: {
                     legend: {
                         labels: {
@@ -427,10 +434,25 @@
         });
     }
 
+    function verFavoritadosUser() {
+        let idUsuario = sessionStorage.getItem("ID_USUARIO") 
 
-    
-
-    
+        fetch(`/favoritos/buscarFavoritadosPorUsuario/${idUsuario}`)
+        .then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (respostaFav) {
+                    console.log(`Dados recebidos: ${JSON.stringify(respostaFav)}`);
+                    sessionStorage.FAVORITOS = JSON.stringify(respostaFav)
+                    exibirFavoritos()
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico2: ${error.message}`);
+            });
+    }
 
 </script>
 
