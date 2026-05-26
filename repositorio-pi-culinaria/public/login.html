@@ -17,8 +17,13 @@
 
 <body onload="entrou(); logado()">
 
+   
+    <div class="alerta_erro">
+                    <div class="card_erro" id="cardErro">
+                        <span id="mensagem_erro"></span>
+                    </div>
+                </div>
     <!--Header-->
-
     <div class="header">
         <div class="container">
             <h1 class="titulo">
@@ -47,11 +52,6 @@
                 </div>
             </div>
             <div class="container">
-                <div class="alerta_erro">
-                    <div class="card_erro" id="cardErro">
-                        <span id="mensagem_erro"></span>
-                    </div>
-                </div>
                 <div class="card card-login">
                     <h2>Que bom ter você de volta!</h2>
                     <div class="formulario">
@@ -118,10 +118,13 @@
             }
             i++
         }
-        if (temArroba == false) {
+        if (!temArroba) {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "E-mail inválido, todo e-mail tem um @";
             finalizarAguardar();
+            setTimeout(() => {
+                cardErro.style.display = "none"
+            }, 4000)
             return false;
         }
 
@@ -129,6 +132,9 @@
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "Insira um e-mail e senha para entrar!";
             finalizarAguardar();
+            setTimeout(() => {
+                cardErro.style.display = "none"
+            }, 4000)
             return false;
         }
         else {

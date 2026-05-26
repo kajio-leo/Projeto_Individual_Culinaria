@@ -15,7 +15,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
 
-<body onload="listar()">
+<body>
+
+  <div class="alerta_erro2">
+          <div class="card_erro2" id="cardErro">
+            <span id="mensagem_erro"></span>
+          </div>
+        </div>
   <!--header inicio-->
   <div class="header">
     <div class="container">
@@ -40,11 +46,6 @@
   <div class="login">
     <div class="bodyLogin">
       <div class="container">
-        <div class="alerta_erro2">
-          <div class="card_erro" id="cardErro">
-            <span id="mensagem_erro"></span>
-          </div>
-        </div>
         <div class="card card-cadastro">
           <h2>Bem-vindo! Cadastre-se aqui!</h2>
           <div class="formulario">
@@ -62,7 +63,13 @@
             </div>
             <div class="campo">
               <span>Senha:</span>
-              <input id="senha_input" type="password" placeholder="Senha" />
+              <input id="senha_input" oninput="validarSenha()" onfocus="mostrar()" onblur="esconder()" type="password" placeholder="Senha" />
+              <p id="senhaEspec"><span id="carac8">· 8 caracteres</span> <br>
+              <span id="maiusc">· letra maiúscula</span> <br>
+              <span id="minusc">· letra minúscula</span> <br>
+              <span id="numeroSenha">· número</span> <br>
+              <span id="caracEspec">· caractere especial(%, $, !...)</span> <br>
+              </p>
             </div>
             <div class="campo">
               <span>Confirmação da Senha:</span>
@@ -105,15 +112,66 @@
     if (sessionStorage.ID_USUARIO != undefined) {
       document.getElementById("login").innerHTML = "Perfil"
     }
-}
+  }
 
+  function mostrar() {
+    senhaEspec.style.display = "block"
+  }
 
+  function esconder() {
+    senhaEspec.style.display = "none"
+  }
+
+  function validarSenha() {
+    var senhaVar = senha_input.value.trim();
+    let i = 0;
+    let temMaiusculo = false
+    let temMinusculo = false
+    let temEspecial = false
+    let temNumero = false
+    let vt_caractereEspec = ['!', '@', '#', '$', '%', '&', '*', '(', ')', '-', '_', '/', '?', '"', '+', '|', '=', ',', '.', ':', ';', '<', '>', '[', ']', '^', '{', '}', '~', '`', '£', '¢', 'ç']
+    let vt_num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+    while (i < senhaVar.length) {
+      if (senhaVar[i] == (senhaVar[i]).toLowerCase()) {
+        temMinusculo = true
+      }
+      if (senhaVar[i] == (senhaVar[i]).toUpperCase()) {
+        temMaiusculo = true
+      }
+      for (let index = 0; index < vt_caractereEspec.length; index++) {
+        if (senhaVar[i] == vt_caractereEspec[index]) {
+          temEspecial = true
+          break
+        }
+      }
+      for (let index = 0; index < vt_num.length; index++) {
+        if (senhaVar[i] == vt_num[index]) {
+          temNumero = true
+          break
+        }
+      }
+      i++
+    }
+
+    if (temEspecial) {
+      caracEspec.style.color = "rgb(0, 140, 0)"
+    }
+    if (temMaiusculo) {
+      maiusc.style.color = "rgb(0, 140, 0)"
+    }
+    if (temMinusculo) {
+      minusc.style.color = "rgb(0, 140, 0)"
+    }
+    if (temNumero) {
+      numeroSenha.style.color = "rgb(0, 140, 0)"
+    }
+    if (senhaVar.length >= 8) {
+      carac8.style.color = "rgb(0, 140, 0)"
+    }
+  }
 
   function cadastrar() {
-    // aguardar();
-
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
     var nomeVar = nome_input.value.trim();
     var emailVar = email_input.value.trim();
     var senhaVar = senha_input.value.trim();
@@ -123,7 +181,9 @@
     let temMaiusculo = false
     let temMinusculo = false
     let temEspecial = false
+    let temNumero = false
     let vt_caractereEspec = ['!', '@', '#', '$', '%', '&', '*', '(', ')', '-', '_', '/', '?', '"', '+', '|', '=', ',', '.', ':', ';', '<', '>', '[', ']', '^', '{', '}', '~', '`', '£', '¢', 'ç']
+    let vt_num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
     while (i < emailVar.length) {
       if (emailVar[i] == '@') {
@@ -144,7 +204,12 @@
           temEspecial = true
           break
         }
-        
+      }
+      for (let index = 0; index < vt_num.length; index++) {
+        if (senhaVar[i] == vt_num[index]) {
+          temNumero = true
+          break
+        }
       }
       i++
     }
@@ -161,39 +226,54 @@
         "Preencha todos os campos para realizar o cadastro";
 
       finalizarAguardar();
+      setTimeout(() => {
+        cardErro.style.display = "none"
+      }, 4000)
       return false;
     }
     
-    if (temArroba == false) {
+    if (!temArroba) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
         "E-mail inválido, todo e-mail tem um @";
 
       finalizarAguardar();
+      setTimeout(() => {
+        cardErro.style.display = "none"
+      }, 4000)
       return false;
     }
-    if (temMaiusculo == false) {
+    if (!temMaiusculo) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
         "Senha inválida, é necessário que tenha ao menos uma letra maiúscula";
 
       finalizarAguardar();
+      setTimeout(() => {
+        cardErro.style.display = "none"
+      }, 4000)
       return false;
     }
-    if (temMinusculo == false) {
+    if (!temMinusculo) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
         "Senha inválida, é necessário que tenha ao menos uma letra minúscula";
 
       finalizarAguardar();
+      setTimeout(() => {
+        cardErro.style.display = "none"
+      }, 4000)
       return false;
     }
-    if (temEspecial == false) {
+    if (!temEspecial) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
         "Senha inválida, é necessário que tenha ao menos um caractere especial";
 
       finalizarAguardar();
+      setTimeout(() => {
+        cardErro.style.display = "none"
+      }, 4000)
       return false;
     }
     if (senhaVar.length < 8) {
@@ -202,6 +282,9 @@
         "Senha inválida, é necessário conter ao menos 8 caracteres";
 
       finalizarAguardar();
+      setTimeout(() => {
+        cardErro.style.display = "none"
+      }, 4000)
       return false;
     }
     if (senhaVar != confirmacaoSenhaVar) {
@@ -210,6 +293,9 @@
         "As senhas não coincidem, tente novamente";
 
       finalizarAguardar();
+      setTimeout(() => {
+        cardErro.style.display = "none"
+      }, 4000)
       return false;
     }
     

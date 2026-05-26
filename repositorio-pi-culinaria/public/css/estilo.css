@@ -435,6 +435,17 @@ body {
   padding: 5px 0;
 }
 
+.campo p {
+  display: none;
+  margin-bottom: 0;
+  margin-top: 4px;  
+  line-height: 1.2;
+}
+
+.campo p span {
+  font-weight: 400;
+}
+
 .botao {
   cursor: pointer;
   font-family: "Poppins", sans-serif;
@@ -490,12 +501,48 @@ body {
   border-radius: 4px;
   border: #c62020 3px solid;
   padding: 10px;
+  margin-top: 4.9%;
+  margin-right: 7.3%;
+}
+
+.card_erro2 {
+  display: none;
+  background-color: #fff;
+  color: black;
+  width: 230px;
+  position: fixed;
+  border-radius: 4px;
+  border: #c62020 3px solid;
+  padding: 10px;
+  margin-top: 4.9%;
+  margin-left: 7.3%;
+}
+
+.card_erro3 {
+  display: none;
+  background-color: #fff;
+  color: black;
+  width: 230px;
+  position: fixed;
+  border-radius: 4px;
+  border: #c62020 3px solid;
+  padding: 10px;
   margin-right: 10%;
 }
 
 .card_erro #mensagem_erro{
-  font-weight: 500;
-  font-size: 20px;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.card_erro2 #mensagem_erro{
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.card_erro3 #mensagem_erro{
+  font-weight: 400;
+  font-size: 18px;
 }
 
 .formulario .tipo_campo {
