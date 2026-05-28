@@ -66,7 +66,7 @@
             <div class="descrRec">
               <p><span style="color: #c62020;">Costelinha oriental</span><br>
               Saborosa costelinha oriental em molho agridoce</p>
-              <button id="7" class="botaoFavorito" onclick="favoritar(this)"><img class="imgFavorito" src="assets/imgs/coracao pequeno.png" alt=""></button>
+              <button id="7" class="botaoFavorito" onclick="estaFavoritado(this)"><img class="imgFavorito" src="assets/imgs/coracao pequeno.png" alt=""></button>
             </div>
           </div>
           <div class="box">
@@ -74,7 +74,7 @@
             <div class="descrRec">
               <p><span style="color: #c62020;">Bolo de cenoura</span><br>
               Receita da vovó do bolo de cenoura fofinho</p>
-              <button id="2" class="botaoFavorito" onclick="favoritar(this)"><img class="imgFavorito" src="assets/imgs/coracao pequeno.png" alt=""></button>
+              <button id="2" class="botaoFavorito" onclick="estaFavoritado(this)"><img class="imgFavorito" src="assets/imgs/coracao pequeno.png" alt=""></button>
             </div>
           </div>
           <div class="box">
@@ -82,7 +82,7 @@
             <div class="descrRec">
               <p><span style="color: #c62020;">Frango com quiabo</span> <br>
               O suculento frango com quiabo do vovô</p>
-              <button id="8" class="botaoFavorito" onclick="favoritar(this)"><img class="imgFavorito" src="assets/imgs/coracao pequeno.png" alt=""></button>
+              <button id="8" class="botaoFavorito" onclick="estaFavoritado(this)"><img class="imgFavorito" src="assets/imgs/coracao pequeno.png" alt=""></button>
             </div>
           </div>
         </div>
@@ -92,7 +92,7 @@
             <div class="descrRec">
               <p><span style="color: #c62020;">Mousse de chocolate</span><br>
               Um pedacinho do céu que derrete na boca</p>
-              <button id="3" class="botaoFavorito" onclick="favoritar(this)"><img class="imgFavorito" src="assets/imgs/coracao pequeno.png" alt=""></button>
+              <button id="3" class="botaoFavorito" onclick="estaFavoritado(this)"><img class="imgFavorito" src="assets/imgs/coracao pequeno.png" alt=""></button>
             </div>
           </div>
           <div class="box">
@@ -100,7 +100,7 @@
             <div class="descrRec">
               <p><span style="color: #c62020;">Hot Dog</span><br>
               Apetitoso Hot Dog, ideal para fazer com as crianças</p>
-              <button id="9" class="botaoFavorito" onclick="favoritar(this)"><img class="imgFavorito" src="assets/imgs/coracao pequeno.png" alt=""></button>
+              <button id="9" class="botaoFavorito" onclick="estaFavoritado(this)"><img class="imgFavorito" src="assets/imgs/coracao pequeno.png" alt=""></button>
             </div>
           </div>
           <div class="box">
@@ -108,7 +108,7 @@
             <div class="descrRec">
               <p><span style="color: #c62020;">Bolo de limão</span><br>
               Azedinho e macio, bolo perfeito para o café da tarde em família</p>
-              <button id="4" class="botaoFavorito" onclick="favoritar(this)"><img class="imgFavorito" src="assets/imgs/coracao pequeno.png" alt=""></button>
+              <button id="4" class="botaoFavorito" onclick="estaFavoritado(this)"><img class="imgFavorito" src="assets/imgs/coracao pequeno.png" alt=""></button>
             </div>
           </div>
         </div>
@@ -164,10 +164,6 @@ function favoritar(botaoFav) {
 
         if (resposta.ok) {
           botaoFav.querySelector('img').src = "assets/imgs/coracaopreenchido.png"
-          botaoFav.disabled = true
-          botaoFav.style.opacity = 1;
-            
-
         } else {
           throw "Houve um erro ao tentar favoritar a receita";
         }
@@ -206,13 +202,49 @@ function verFavoritado(idReceita) {
     .then(function (resultado) {
         if (resultado.ja) {
             document.getElementById(idReceita).querySelector('img').src = "assets/imgs/coracaopreenchido.png"
-            document.getElementById(idReceita).disabled = true;
-            document.getElementById(idReceita).style.opacity = 1;
         }
     })
     .catch(function (erro) {
         console.log(`#ERRO: ${erro}`);
     });
   }
+
+  function desfavoritar(botaoFav) {
+    let idReceita = botaoFav.id
+    let idUser = sessionStorage.getItem("ID_USUARIO")
+        console.log("Criar função de desfavoritar receita - ID" + idReceita + " - IDUser " + idUser);
+        fetch(`/favoritos/desfavoritar`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              idReceita: idReceita,
+              idUser: idUser
+            }),
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                botaoFav.querySelector('img').src = "assets/imgs/coracao pequeno.png";
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar desfavoritar! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+    function estaFavoritado(botaoFav) {
+      let coracao = botaoFav.querySelector('img').src;
+
+      if (coracao.includes("coracaopreenchido")) {
+        desfavoritar(botaoFav)
+      } else {
+        favoritar(botaoFav)
+      }
+      
+    }
 
 </script>

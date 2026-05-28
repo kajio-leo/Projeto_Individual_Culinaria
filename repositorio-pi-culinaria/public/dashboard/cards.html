@@ -20,7 +20,7 @@
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), verFavoritadosUser(), obterKpi1(), obterKpi2(), obterGrafico2()">
+<body onload="validarSessao(), verFavoritadosUser(), obterKpi1(), obterKpi2(), obterGrafico2(), respondeu()">
 
     <div class="janela">
 
@@ -39,8 +39,8 @@
                     <h3>Receitas Favoritas</h3>
                 </a>
             </div>
-            <div class="btn-nav-white">
-                <a href="../quiz.html">
+            <div class="btn-nav-white" onclick="deletar()">
+                <a href="#">
                     <h3>Quiz</h3>
                 </a>
             </div>
@@ -452,6 +452,53 @@
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico2: ${error.message}`);
             });
+    }
+
+    function deletar() {
+        let idUser = sessionStorage.getItem("ID_USUARIO");
+
+        let resposta = prompt(`Ao refazer o quiz as suas respostas anteriores serão apagadas, tem certeza que quer refazer? Digite 'sim' para confirmar`)
+        resposta = resposta.trim().toUpperCase()
+
+        if (resposta == 'SIM') {
+            console.log("Criar função de apagar respostas do quizz - ID" + idUser);
+            fetch(`/quizzes/deletar/${idUser}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function (resposta) {
+
+                if (resposta.ok) {
+                    window.location = "../quiz.html"
+                } else if (resposta.status == 404) {
+                    window.alert("Deu 404!");
+                } else {
+                    throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+        }   
+    }
+
+    function respondeu() {
+        let idUser = sessionStorage.getItem("ID_USUARIO")
+        fetch("/quizzes/temnobanco", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            id: idUser
+                        })
+                    })
+                    .then(r => r.json())
+                    .then(resultadoAutenticar => {
+                        if (resultadoAutenticar.tem) {
+                            window.location = "#"
+                        } else {
+                            window.location = "../quiz.html"
+                        }
+                    })
     }
 
 </script>

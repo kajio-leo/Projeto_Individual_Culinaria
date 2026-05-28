@@ -52,7 +52,26 @@ function temnobanco(req, res) {
 
 }
 
+function deletar(req, res) {
+    var idUser = req.params.idUser;
+
+    quizModel.deletar(idUser)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao deletar os resultados anteriores do quiz: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 module.exports = {
     guardar,
-    temnobanco
+    temnobanco,
+    deletar
 }

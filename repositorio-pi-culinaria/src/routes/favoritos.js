@@ -19,4 +19,8 @@ router.get("/buscarFavoritadosPorUsuario/:idUsuario", function (req, res) {
     favoritoController.buscarFavoritadosPorUsuario(req, res);
 }) 
 
+router.delete("/desfavoritar", function (req, res) {
+    favoritoController.desfavoritar(req, res);
+});
+
 module.exports = router;
