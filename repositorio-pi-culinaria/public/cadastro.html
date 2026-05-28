@@ -169,6 +169,22 @@
     if (senhaVar.length >= 8) {
       carac8.style.color = "rgb(0, 140, 0)"
     }
+
+    if (!temEspecial) {
+      caracEspec.style.color = "rgb(198, 32, 32)"
+    }
+    if (!temMaiusculo) {
+      maiusc.style.color = "rgb(198, 32, 32)"
+    }
+    if (!temMinusculo) {
+      minusc.style.color = "rgb(198, 32, 32)"
+    }
+    if (!temNumero) {
+      numeroSenha.style.color = "rgb(198, 32, 32)"
+    }
+    if (senhaVar.length < 8) {
+      carac8.style.color = "rgb(198, 32, 32)"
+    }
   }
 
   function cadastrar() {
@@ -243,6 +259,18 @@
       }, 4000)
       return false;
     }
+    if (emailVar.length < 6) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "E-mail inválido, o e-mail é muito curto";
+
+      finalizarAguardar();
+      setTimeout(() => {
+        cardErro.style.display = "none"
+      }, 4000)
+      return false;
+    }
+
     if (!temMaiusculo) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
