@@ -41,6 +41,46 @@ body {
   font-weight: 800;
 }
 
+.corpo {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%
+}
+
+.descricao {
+  width: 60%;
+  height: 100%;
+  background-color: #b11d1d;
+}
+
+.imgSiteRec {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.imgSiteRec img {
+  margin-top: 5%;
+  width: 548px;
+  display: flex;
+  flex-direction: center;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 3%;
+}
+
+.parecidas {
+  width: 40%;
+}
+
+.descricaoReceita {
+  display: flex;
+  width: 548px;
+  flex-direction: center;
+}
+
 .navbar {
   width: 200px;
   display: flex;
@@ -618,10 +658,20 @@ input {
 .sobre .container .imgs {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
 }
 
+.tank-imagem {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px;
+}
 
+.imagemSobre img {
+  height: 350px;
+  object-fit: cover;
+}
 
 /* ALERTA */
 

@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exemplo - Quiz</title>
+    <title>Comp. Cozinheiros | Quiz</title>
 
     <script src="./js/sessao.js"></script>
 
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="./assets/icon/icon.png">
 </head>
 
 
@@ -23,13 +24,12 @@
 
         <div id="jogo" class="width-fit-content flex-colunar border-secondary">
             <div id="topo" class="cima">
+                <div id="perguntaDaQuestaoAtual" class="padding-8">
+                    <span id="spanQuestaoExibida" class="text-bold"></span>
+                </div>
                 <div id="infoQuestao" class="padding-8 destaque">
                     <span class="numeroQuest"> <span id="spanNumeroDaQuestaoAtual"></span>/<span id="qtdQuestoes"></span>
                      </span>
-                </div>
-
-                <div id="perguntaDaQuestaoAtual" class="padding-8">
-                    <span id="spanQuestaoExibida" class="text-bold"></span>
                 </div>
             </div>
 
@@ -59,17 +59,10 @@
                     <label for="quintaOpcao" class="option" id="labelOpcaoCinco"></label>
                 </span>
             </div>
-            <div class="algsBotoes">
-                <div>
-                    <button class="btnPassadores">Anterior</button>    
-                </div>    
-                <div id="botoes" class="btnOpcao">
-                    <button onclick="submeter()" class="btnProx" id="btnSubmeter">Próxima pergunta</button>
-                    <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
-                </div>
-                <div>
-                    <button class="btnPassadores">Próxima</button>    
-                </div>
+
+            <div id="botoes" class="btnOpcao">
+                <button onclick="submeter()" class="btnProx" id="btnSubmeter">Próxima pergunta</button>
+                <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
             </div>
         </div>
     </div>

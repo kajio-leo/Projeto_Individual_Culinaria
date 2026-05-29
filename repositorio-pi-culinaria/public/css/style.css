@@ -76,7 +76,7 @@ body {
 }
 
 .radio:checked + .option {
-    background-color: #964e4e;
+    background-color: #cc7f7f;
     border: 2px solid #c62020;
     color: white;
 }
@@ -113,7 +113,7 @@ body {
 .cima {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
 }
 

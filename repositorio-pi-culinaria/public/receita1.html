@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Comp. Cozinheiros | Cookies</title>
+
+    <script src="./js/sessao.js"></script>
+
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="icon" href="./assets/icon/icon.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body onload="entrou()">
+
+    <!--header inicio-->
+    <div class="header">
+        <div class="container">
+            <h1 class="titulo">
+                <a href="./index.html">Companheiros Cozinheiros</a>
+            </h1>
+            <ul class="navbar">
+                <li>
+                    <a href="receitas.html">Receitas</a>
+                </li>
+                <li>
+                    <a href="./sobre.html">Sobre</a>
+                </li>
+                <li>
+                    <a id="login" href="./login.html">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--header fim-->
+
+
+    <div class="corpo">
+        <div class="descricao">
+            <div class="imgSiteRec">
+                <img src="./assets/imgs/cookiepsite.png" alt="">
+                <span class="descricaoReceita">Essa é a melhor receita de cookies com gotas de chocolate já feita. Crocante nas laterais e macio no centro, o rico sabor da manteiga caramelizada e o chocolate 70% contrastam o dulçor da massa em um equilíbrio perfeito.</span>
+            </div>
+            <div class="ingredientins">
+                
+            </div>
+            <div class="preparin">
+                modo preparo
+            </div>
+        </div>
+        <div class="parecidas">
+
+        </div>
+    </div>
+
+
+    <!--footer inicio-->
+    <div class="footer">
+        <div class="container">
+            <h4>Feito com carinho &hearts; por um aluno SPTech &copy; 2026</h4>
+        </div>
+    </div>
+    <!--footer fim-->
+
+
+</body>
+
+</html>
+<script>
+
+    function entrou() {
+    if (sessionStorage.ID_USUARIO != undefined) {
+      document.getElementById("login").innerHTML = "Perfil"
+    }
+}
+
+</script>
