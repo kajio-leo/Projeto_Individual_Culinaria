@@ -49,9 +49,11 @@ body {
 }
 
 .descricao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 60%;
   height: 100%;
-  background-color: #b11d1d;
 }
 
 .imgSiteRec {
@@ -61,7 +63,7 @@ body {
   width: 100%;
 }
 
-.imgSiteRec img {
+.fotoPrincipal {
   margin-top: 5%;
   width: 548px;
   display: flex;
@@ -71,11 +73,144 @@ body {
   border-radius: 3%;
 }
 
+.descricaoEFav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 548px;
+  margin-top: 2%;
+}
+
+.botaoFavoritoReceita {
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.imgFavoritoReceita {
+  width: 48px;
+  height: 48px;
+  transition: 0.2s;
+}
+
+.imgFavoritoReceita:hover {
+  transform: scale(1.2);
+}
+
+.ingredientins {
+  box-shadow: 0px 0px 1px 1px #c62020;
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: white;
+  width: 80%;
+}
+
+.listaIngre {
+  margin-top: 0px;
+  font-size: 24px;
+  list-style: disc;
+  line-height: 0.8;
+  color: #c62020;
+}
+
+.ingredientins h4 {
+  color: #c62020;
+  margin: 3% 0 3% 0;
+  font-size: 30px;
+  text-align: center;
+}
+
+.listaIngre p {
+  color: #000000;
+  font-size: 18px;
+}
+
+.preparins {
+  box-shadow: 0px 0px 1px 1px #c62020;
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: white;
+  width: 80%;
+  margin-bottom: 5%;
+}
+
+.listaPreparin {
+  margin-top: 0px;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #c62020;
+}
+
+.listaPreparin p {
+  color: #000000;
+  font-size: 18px;
+}
+
+.preparins h4 {
+  color: #c62020;
+  margin: 3% 0 3% 0;
+  font-size: 30px;
+  text-align: center;
+}
+
 .parecidas {
   width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #c62020;
+}
+
+.tituloParec {
+  font-size: 30px;
+}
+
+.cartao {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6%;
+  width: 50%;
+  height: 18%;
+  margin-bottom: 15%;
+  transition: 0.3 ease;
+  cursor: pointer;
+}
+
+.cartao:hover {
+  transform: scale(1.05);
+}
+
+.imgCartao {
+  height: 50%;
+  background-color: #c62020;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10% ;
+  overflow: hidden;
+}
+
+.imgCartao img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+.descCartao {
+  height: 50%;
+  background-color: white;
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
 }
 
 .descricaoReceita {
+  margin-top: 2%;
   display: flex;
   width: 548px;
   flex-direction: center;

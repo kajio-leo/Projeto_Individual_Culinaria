@@ -15,8 +15,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body onload="entrou()">
-
+<body onload="entrou(), verFavoritado(1)">
+    <div class="alerta_erro">
+            <div class="card_erro3" id="cardErro">
+                <span id="mensagem_erro"></span>
+            </div>
+    </div>
     <!--header inicio-->
     <div class="header">
         <div class="container">
@@ -42,18 +46,117 @@
     <div class="corpo">
         <div class="descricao">
             <div class="imgSiteRec">
-                <img src="./assets/imgs/cookiepsite.png" alt="">
-                <span class="descricaoReceita">Essa é a melhor receita de cookies com gotas de chocolate já feita. Crocante nas laterais e macio no centro, o rico sabor da manteiga caramelizada e o chocolate 70% contrastam o dulçor da massa em um equilíbrio perfeito.</span>
+                <img class="fotoPrincipal" src="./assets/imgs/cookiepsite.png" alt="">
+                <div class="descricaoEFav">
+                    <span class="descricaoReceita">Essa é a melhor receita de cookies com gotas de chocolate já feita. Crocante nas laterais e macio no centro, o rico sabor da manteiga caramelizada e o chocolate 70% contrastam o dulçor da massa em um equilíbrio perfeito.</span>
+                    <button id="1" class="botaoFavoritoReceita" onclick="estaFavoritado(this)"><img class="imgFavoritoReceita" src="assets/imgs/coracao pequeno.png" alt=""></button>
+                </div>
             </div>
             <div class="ingredientins">
+                <h4>Ingredientes</h4>
+                <ul class="listaIngre">
+                    <li>
+                        <p>210g de manteiga</p>
+                    </li>
+                    <li>
+                        <p>250g de açúcar mascavo</p>
+                    </li>
+                    <li>
+                        <p>120g de açúcar refinado</p>
+                    </li>
+                    <li>
+                        <p>2 ovos</p>
+                    </li>
+                    <li>
+                        <p>1 colher de sopa de extrado de baunilha</p>
+                    </li>
+                    <li>
+                        <p>380g de farinha</p>
+                    </li>
+                    <li>
+                        <p>1 colher de chá de fermento</p>
+                    </li>
+                    <li>
+                        <p>1/2 colher de chá de bicarbonato de sódio</p>
+                    </li>
+                    <li>
+                        <p>3g de sal refinado</p>
+                    </li>
+                    <li>
+                        <p>250g de chocolate 70% picado ou em gotas</p>
+                    </li>
+                </ul>
                 
             </div>
-            <div class="preparin">
-                modo preparo
+            <div class="preparins">
+                <h4>Preparo</h4>
+                <ol class="listaPreparin">
+                    <li>
+                        <p>Dourar a manteiga em fogo baixo mexendo incessantemente.</p>
+                    </li>
+                    <li>
+                        <p>Resfriar ela até endurecer novamente, depois de resfriada bater até ficar clara.</p>
+                    </li>
+                    <li>
+                        <p>Acrescentar o açúcar mascavo e o refinado e agitar durante 2-3 minutos.</p>
+                    </li>
+                    <li>
+                        <p>Adicionar os ovos, e o extrato de baunilha e bater até incorporar tudo.</p>
+                    </li>
+                    <li>
+                        <p>Incluir a farinha, o fermento, o bicarbonato e o sal e misturar até ficar homogêneo.</p>
+                    </li>
+                    <li>
+                        <p>Juntar o chocolate à massa e mexer.</p>
+                    </li>
+                    <li>
+                        <p>Descansar a massa na geladeira por 24 horas.</p>
+                    </li>
+                    <li>
+                        <p>Formar bolinhas com a massa e congelar por 12 horas.</p>
+                    </li>
+                    <li>
+                        <p>Retirar as bolinhas do congelador e assar em um forno pré aquecido a 220° C até ficar dourado.</p>
+                    </li>
+                </ol>
             </div>
         </div>
         <div class="parecidas">
+            <div class="tituloParec">
+                <h3>Você também pode gostar</h3>
+            </div>
+            <div class="cartao">
+                <div class="imgCartao">
+                    <img src="./assets/imgs/mousse.jpg" alt="Imagem de um Mousse de Chocolate">
+                </div>
+                <div class="descCartao">
 
+                </div>
+            </div>
+            <div class="cartao">
+                <div class="imgCartao">
+                    <img src="./assets/imgs/bolo de cenoura.jpg" alt="">
+                </div>
+                <div class="descCartao">
+
+                </div>
+            </div>
+            <div class="cartao">
+                <div class="imgCartao">
+                    <img src="./assets/imgs/torta-maca.png" alt="">
+                </div>
+                <div class="descCartao">
+
+                </div>
+            </div>
+            <div class="cartao">
+                <div class="imgCartao">
+                    <img src="./assets/imgs/costelinha.jpg" alt="">
+                </div>
+                <div class="descCartao">
+
+                </div>
+            </div>
         </div>
     </div>
 
@@ -77,5 +180,119 @@
       document.getElementById("login").innerHTML = "Perfil"
     }
 }
+
+
+function favoritar(botaoFav) {
+        let idReceita = botaoFav.id
+        let idUsuario = sessionStorage.getItem("ID_USUARIO")
+
+        if (idUsuario == undefined) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Entre com a sua conta para salvar a receita como favorita";
+          
+          setTimeout(() => {
+            cardErro.style.display = "none";
+          }, "4000");
+          return
+        }
+
+        fetch("/favoritos/favoritar", {
+          method: "POST",
+          headers: {
+          "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+          receitasServer: idReceita,
+          id: idUsuario
+          }),
+        })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          botaoFav.querySelector('img').src = "assets/imgs/coracaopreenchido.png"
+        } else {
+          throw "Houve um erro ao tentar favoritar a receita";
+        }
+        
+      })
+      .catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+
+      });
+
+    return false;
+  }
+
+  function verFavoritado(idReceita) {
+      let idUsuario = sessionStorage.getItem("ID_USUARIO");
+      
+      if (idUsuario == null) {
+        return
+      }
+
+      fetch("/favoritos/favoritado", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: idUsuario,
+        idReceita: idReceita
+      }),
+    })
+
+      .then(function (resposta) {
+        return resposta.json();
+    })
+    .then(function (resultado) {
+        if (resultado.ja) {
+            document.getElementById(idReceita).querySelector('img').src = "assets/imgs/coracaopreenchido.png"
+        }
+    })
+    .catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+    });
+  }
+
+  function desfavoritar(botaoFav) {
+    let idReceita = botaoFav.id
+    let idUser = sessionStorage.getItem("ID_USUARIO")
+        console.log("Criar função de desfavoritar receita - ID" + idReceita + " - IDUser " + idUser);
+        fetch(`/favoritos/desfavoritar`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              idReceita: idReceita,
+              idUser: idUser
+            }),
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                botaoFav.querySelector('img').src = "assets/imgs/coracao pequeno.png";
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar desfavoritar! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+    function estaFavoritado(botaoFav) {
+      let coracao = botaoFav.querySelector('img').src;
+
+      if (coracao.includes("coracaopreenchido")) {
+        desfavoritar(botaoFav)
+      } else {
+        favoritar(botaoFav)
+      }
+      
+    }
 
 </script>
