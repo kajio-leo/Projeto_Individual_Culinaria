@@ -164,17 +164,20 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #c62020;
 }
 
 .tituloParec {
+  width: 70%;
+  text-align: center;
   font-size: 30px;
+  color: #c62020;
 }
 
 .cartao {
+  box-shadow: 0 0 1px 1px rgb(190, 190, 190);
   display: flex;
   flex-direction: column;
-  border-radius: 6%;
+  border-radius: 20px;
   width: 50%;
   height: 18%;
   margin-bottom: 15%;
@@ -189,8 +192,8 @@ body {
 .imgCartao {
   height: 50%;
   background-color: #c62020;
-  border-top-left-radius: 10%;
-  border-top-right-radius: 10% ;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   overflow: hidden;
 }
 
@@ -203,10 +206,102 @@ body {
 
 
 .descCartao {
+  display: flex;
+  flex-direction: column;
   height: 50%;
   background-color: white;
-  border-bottom-left-radius: 10%;
-  border-bottom-right-radius: 10%;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.tituloCartao {
+  height: 40%;
+  width: 100%;
+}
+
+.tituloCartao h6{
+  margin: 3% 0 0 5%;
+  font-size: 24px;
+  color: #c62020;
+}
+
+.tagsCartao {
+  display: flex;
+  flex-direction: row;
+  height: 60%;
+  width: 100%;
+}
+
+.tagSobremesa {
+  box-shadow: 0 0 1px 1px rgb(191, 191, 191);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-left: 5%;
+  height: 40px;
+  width: 100px;
+  background-color: rgb(177, 227, 157);
+  color: white;
+  border-radius: 10px;
+}
+
+.tagFruta {
+  box-shadow: 0 0 1px 1px rgb(191, 191, 191);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-left: 5%;
+  height: 40px;
+  width: 100px;
+  background-color: pink;
+  color: white;
+  border-radius: 10px;
+}
+
+.tagChocolate {
+  box-shadow: 0 0 1px 1px rgb(191, 191, 191);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-left: 5%;
+  height: 40px;
+  width: 100px;
+  background-color: rgb(159, 138, 117);
+  color: white;
+  border-radius: 10px;
+}
+
+.tagPraPrinc {
+  box-shadow: 0 0 1px 1px rgb(191, 191, 191);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-left: 5%;
+  height: 40px;
+  width: 100px;
+  background-color: rgb(226, 94, 94);
+  color: white;
+  border-radius: 10px;
+  line-height: 0.9;
+}
+
+.tagAgridoce {
+  box-shadow: 0 0 1px 1px rgb(191, 191, 191);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-left: 5%;
+  height: 40px;
+  width: 100px;
+  background-color: rgb(148, 199, 233);
+  color: white;
+  border-radius: 10px;
+
 }
 
 .descricaoReceita {
