@@ -903,6 +903,15 @@ input {
   object-fit: cover;
 }
 
+.imagemSobre2 img {
+  height: 300px;
+  object-fit: cover;
+}
+
+.espacoVazio {
+  height: 50px;
+}
+
 /* ALERTA */
 
 #alerta {
