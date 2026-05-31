@@ -5,8 +5,7 @@ Aplicação web (estilo blog) desenvolvida com o objetivo de aproximar pessoas p
 Funcionalidades:  
 Cadastro e login de usuários;  
 Visualização de receitas;  
-Sistema de favoritos;  
-Sorteio de receitas aleatórias;  
+Sistema de favoritos;   
 Sorteio de receitas favoritadas;  
 Quiz interativo;  
 Dashboard com dados do usuário  
