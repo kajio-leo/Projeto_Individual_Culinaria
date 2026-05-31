@@ -452,15 +452,13 @@ body {
 .card-favorito-dash {
   margin-left: 10%;
   margin-right: 10%;
-  margin-top: 10%;
+  margin-top: 8%;
   min-width: 30%;
   max-width: 100%;
   width: 80%;
   flex-wrap: wrap;
   display: flex;
-  /* text-align: center; */
   height: 130px;
-  /* justify-content: right; */
   background-color: #c62020;
   font-size: 20px;
 }
@@ -474,10 +472,8 @@ body {
   width: 80%;
   flex-wrap: wrap;
   display: flex;
-  /* text-align: center; */
   height: 130px;
-  /* justify-content: right; */
-  background-color: #580e0e;
+  background-color: #981313;
   font-size: 20px;
 }
 
