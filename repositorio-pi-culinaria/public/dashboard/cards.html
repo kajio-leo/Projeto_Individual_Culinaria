@@ -216,19 +216,19 @@
         let porcentagem = ((Number(respostaKpi2[0].qtdUser) / Number(respostaKpi2[0].qtdUserTot)) * 100).toFixed();
         let receita = '';
 
-        for (let i = 0; i < vt_favoritos.length; i++) {
+        if (vt_favoritos.length < 1) {
+            document.getElementById("kpi2-text1").innerHTML = `Favorite uma receita para poder ver esse indicador`
+        } else {
+            for (let i = 0; i < vt_favoritos.length; i++) {
             if (vt_favoritos[i].idRec == respostaKpi2[0].menosPopular) {
                 receita = vt_favoritos[i].nome
             }
+            }
+
+            document.getElementById("kpi2-text1").innerHTML = 'A receita que você salvou menos popular é:'
+            document.getElementById("kpi2-nome").innerHTML = `${receita}`
+            document.getElementById("kpi2-text2").innerHTML = `De todos os usuários somente ${porcentagem}% favoritou ela e você faz parte disso`
         }
-
-        document.getElementById("kpi2-text1").innerHTML = 'A receita que você salvou menos popular é:'
-        document.getElementById("kpi2-nome").innerHTML = `${receita}`
-        document.getElementById("kpi2-text2").innerHTML = `De todos os usuários somente ${porcentagem}% favoritou ela e você faz parte disso`
-
-
-
-
     }
 
 
