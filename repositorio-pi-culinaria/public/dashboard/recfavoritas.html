@@ -9,8 +9,9 @@
     <title>Comp. Cozinheiros | Favoritas</title>
 
     
-    <link rel="stylesheet" href="./../css/dashboards.css">
+
     <link rel="stylesheet" href="./../css/estilo.css" />
+    <link rel="stylesheet" href="./../css/recfavoritas.css" />
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
@@ -68,17 +69,29 @@
 
         </div>
 
-        <div class="perfil">
-            <div class="favoritas">
-                <div class="cards" id="cardFavoritos1">
+        <div class="tank-recFav">
+            <div class="topoFavoritas">
+                <div>
+                    <h2>Receitas Favoritas</h2>
+                </div>
+                <div class="sorteio">
+                    <h4>Sortear receita para fazer</h4>
+                    <span class="botaoSort" onclick="sortear()">Sortear</span>
                 </div>
             </div>
-            <div class="favoritas">
-                <div class="cards" id="cardFavoritos2">
+            <div class="perfil">
+                
+                <div class="favoritas">
+                    <div class="cards" id="cardFavoritos1">
+                    </div>
                 </div>
-            </div>
-            <div class="favoritas">
-                <div class="cards" id="cardFavoritos3">
+                <div class="favoritas">
+                    <div class="cards" id="cardFavoritos2">
+                    </div>
+                </div>
+                <div class="favoritas">
+                    <div class="cards" id="cardFavoritos3">
+                    </div>
                 </div>
             </div>
         </div>
@@ -105,7 +118,7 @@
         while (i < 4) {
             document.getElementById("cardFavoritos1").innerHTML += `
                 <a href="../receita${vt_favoritos[i].idRec}.html">
-                    <div class="card-favorito-dash">
+                    <div class="card-favorito-dash" id="card${vt_favoritos[i].idRec}">
                         <div class="title-favorito">
                             <h1>${vt_favoritos[i].nome}</h1>
                         </div>
@@ -429,5 +442,27 @@
                             window.location = "../quiz.html"
                         }
                     })
+    }
+
+    function sortear() {
+        let vt_favoritos = JSON.parse(sessionStorage.getItem("FAVORITOS"));
+
+        if (vt_favoritos.length == 0) {
+        alert("Você ainda não tem receitas favoritas!")
+        }
+
+        let iAle = Math.floor(Math.random() * vt_favoritos.length);
+        let recSort = vt_favoritos[iAle];
+
+        let cards = document.querySelectorAll(".card-favorito-dash");
+            cards.forEach(card => {
+            card.style.backgroundColor = "#c62020"
+            });
+        
+        let idSort = recSort.idRec;
+        let cardSort = document.getElementById("card" + idSort);
+        if (cardSort) {
+        cardSort.style.backgroundColor = "#580e0e";
+    }
     }
 </script>
