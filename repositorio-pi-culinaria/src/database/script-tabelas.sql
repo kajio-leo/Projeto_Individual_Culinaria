@@ -1,6 +1,10 @@
 CREATE DATABASE projetoindividual;
 USE projetoindividual;
 
+CREATE USER 'webviz'@'%' IDENTIFIED BY 'Batatinha@123';
+GRANT SELECT, INSERT, DELETE ON projetoindividual.* TO 'webviz'@'%';
+FLUSH PRIVILEGES; 
+
 CREATE TABLE usuario (
 id INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(80),
@@ -167,21 +171,5 @@ INSERT INTO receitaIngrediente (idReceita, idIngrediente, quantidade, unidadeMed
 
 CREATE VIEW vw_card AS SELECT f.idUsuario AS id, f.idReceita AS idRec, r.nome AS nome, r.descricao AS descr, f.dtFavorita AS dtFavorita FROM receita AS r
 JOIN favorita AS f ON f.idReceita = r.id;
-
-SELECT idRec, nome, descr FROM vw_card WHERE id = 1;
-
-
-SELECT r.resposta AS opcao, 
-(SELECT COUNT(r.idPergunta) FROM resposta AS r WHERE idPergunta = 1) AS qtdTotal,
-(SELECT COUNT(r.idPergunta) FROM resposta AS r WHERE resposta = opcao) AS qtdIgual 
-FROM resposta AS r WHERE idUsuario = ${idUser} AND idPergunta = 1;
-
-
-
-
-SELECT (SELECT f.idReceita FROM favorita AS f WHERE f.idReceita IN (SELECT idReceita FROM favorita WHERE idUsuario = ${idUser}) GROUP BY f.idReceita ORDER BY COUNT(f.idReceita) LIMIT 1) AS menosPopular,
-(SELECT COUNT(f.idUsuario) FROM favorita AS f WHERE f.idReceita = 
-(SELECT f2.idReceita FROM favorita AS f2 WHERE f2.idReceita IN (SELECT idReceita FROM favorita WHERE idUsuario = ${idUser}) GROUP BY f2.idReceita ORDER BY COUNT(f2.idReceita) LIMIT 1)) AS qtdUser,
-(SELECT COUNT(id) FROM usuario) AS qtdUserTot;
  
 
