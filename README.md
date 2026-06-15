@@ -1,4 +1,5 @@
 Companheiros Cozinheiros
+Projeto Acadêmico da SPTECH realizado no primeiro semestre do curso de Inteligência Artificial em Sistemas de Informação
 
 Aplicação web (estilo blog) desenvolvida com o objetivo de aproximar pessoas por meio da culinária
 
